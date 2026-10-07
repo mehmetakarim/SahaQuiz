@@ -56,7 +56,15 @@ Bu dosya proje görevlerini, önceliklerini, kabul kriterlerini ve doğrulama du
   - [x] 1080x1920 30 FPS H.264 dikey sessiz video çıktısı başarıyla üretildi (`test_output_cartoon.mp4`).
   - [x] Orijinal sesin dosyada bulunmadığı (sessiz video) ffprobe ile doğrulandı.
   - [x] Rust Tauri bağımlılıkları ve Cargo.lock oluşturuldu.
-- **Doğrulama Sonucu:** `ffprobe` ile incelendi: `width: 1080`, `height: 1920`, `r_frame_rate: 30/1`, `codec_name: h264`, ses akışı: 0 (tamamen sessiz).
+### [TASK-005] AI Paketleri (PyTorch & Ultralytics) ve Prodüksiyon Derleme Doğrulaması
+- **Öncelik:** Normal
+- **Durum:** Tamamlandı
+- **Amaç ve Kapsam:** .venv sanal ortamına PyTorch, Torchvision, Ultralytics, OpenCV-Python kurulumu ve prodüksiyon frontend build kontrolü.
+- **Kabul Kriterleri:**
+  - [x] PyTorch, torchvision, ultralytics, opencv-python sanal ortama kuruldu.
+  - [x] Frontend `npm run build` prodüksiyon bundle'ı 0 hata ile derlendi (36s).
+  - [x] Tüm sistem gereksinimleri ve modeller doğrulandı.
+- **Doğrulama Sonucu:** `npm run build` (tsc & vite build) başarıyla 0 hata ile sonuçlandı; PyTorch/Ultralytics başarıyla yüklendi.
 - **Yayın Durumu:** Doğrulandı / Yerel test başarılı.
 
 ---
