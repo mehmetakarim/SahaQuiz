@@ -194,6 +194,11 @@ def draw_overlays(draw, badge_text, question_text, difficulty, timer_sec, curren
     draw.text((80, CANVAS_HEIGHT - 80), warning_text, fill=(200, 200, 200, 180), font=font_warning)
 
 
+def color_distance(c1, c2):
+    """İki RGB rengi arasındaki Öklid mesafesi"""
+    return math.sqrt((c1[0] - c2[0])**2 + (c1[1] - c2[1])**2 + (c1[2] - c2[2])**2)
+
+
 def render_cartoon_frame(
     detections,
     home_colors,
@@ -209,18 +214,22 @@ def render_cartoon_frame(
 ):
     """
     Tek bir kareyi 1080x1920 dikey 2D karikatür olarak oluşturur ve PIL Image nesnesi döner.
+    Videonun gerçek boyutuna (orig_w, orig_h) göre doğru oran ve ofsetle yerleştirir.
     """
+    import math
+
     img = Image.new("RGBA", (CANVAS_WIDTH, CANVAS_HEIGHT), color=COLOR_PITCH_1)
     draw = ImageDraw.Draw(img)
 
     # Arka plan saha
     draw_pitch_background(draw)
 
-    # Oyuncuları çiz
-    players = detections.get("players", [])
-    scale_x = CANVAS_WIDTH / float(orig_w) if orig_w > 0 else 1.0
-    scale_y = (CANVAS_HEIGHT - 600) / float(orig_h) if orig_h > 0 else 1.0
-    offset_y = 300
+    # Dinamik ölçekleme ve dikey merkezleme
+    # Videonun en-boy oranını koruyarak 1080 genişliğe uydur
+    scale = CANVAS_WIDTH / float(orig_w) if orig_w > 0 else 1.0
+    scaled_h = orig_h * scale
+    # Dikeyde merkezle (TikTok güvenli alanı 200px - 1720px arası)
+    offset_y = max(180, int((CANVAS_HEIGHT - scaled_h) / 2.0))
 
     home_shirt = hex_to_rgb(home_colors.get("shirt", "#DE0B1E"))
     home_shorts = hex_to_rgb(home_colors.get("shorts", "#FDB913"))
@@ -230,6 +239,8 @@ def render_cartoon_frame(
     away_shorts = hex_to_rgb(away_colors.get("shorts", "#FFFFFF"))
     away_socks = hex_to_rgb(away_colors.get("socks", "#00205B"))
 
+    players = detections.get("players", [])
+
     for i, p in enumerate(players):
         box = p["box"]
         x1, y1, x2, y2 = box
@@ -237,14 +248,22 @@ def render_cartoon_frame(
         orig_cy = (y1 + y2) / 2.0
         orig_h_box = y2 - y1
 
-        target_cx = int(orig_cx * scale_x)
-        target_cy = int(orig_cy * scale_y + offset_y)
-        target_h = int(orig_h_box * scale_y)
+        target_cx = int(orig_cx * scale)
+        target_cy = int(orig_cy * scale + offset_y)
+        target_h = int(orig_h_box * scale)
 
-        # Takım ayrımı (yarısı ev, yarısı deplasman, ilki kaleci)
-        if i == 0:
+        # Oyuncunun kareden tespit edilen forma rengi
+        detected_color = p.get("color", (128, 128, 128))
+        d_home = math.sqrt(sum((c1 - c2)**2 for c1, c2 in zip(detected_color, home_shirt)))
+        d_away = math.sqrt(sum((c1 - c2)**2 for c1, c2 in zip(detected_color, away_shirt)))
+
+        # Takım ayrımı (renk benzerliği veya stabil ID bazlı)
+        is_home = d_home <= d_away
+        is_gk = (p.get("id", 0) % 11 == 1) or (i == 0 and len(players) > 4)
+
+        if is_gk:
             draw_player_sprite(draw, target_cx, target_cy, target_h, home_shirt, home_shorts, home_socks, is_gk=True, style=style)
-        elif i % 2 == 0:
+        elif is_home:
             draw_player_sprite(draw, target_cx, target_cy, target_h, home_shirt, home_shorts, home_socks, is_gk=False, style=style)
         else:
             draw_player_sprite(draw, target_cx, target_cy, target_h, away_shirt, away_shorts, away_socks, is_gk=False, style=style)
@@ -252,8 +271,8 @@ def render_cartoon_frame(
     # Topu çiz
     ball = detections.get("ball")
     if ball is not None:
-        bx = int(ball[0] * scale_x)
-        by = int(ball[1] * scale_y + offset_y)
+        bx = int(ball[0] * scale)
+        by = int(ball[1] * scale + offset_y)
         draw_ball(draw, bx, by)
 
     # Üst ve alt overlayler

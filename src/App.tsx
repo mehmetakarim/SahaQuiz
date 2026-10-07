@@ -223,6 +223,7 @@ export const App: React.FC = () => {
           {state.currentStep === 2 && (
             <Step2Cut
               videoName={state.videoName}
+              videoUrl={state.videoUrl}
               metadata={state.metadata}
               inSec={state.inSec}
               outSec={state.outSec}

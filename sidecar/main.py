@@ -258,6 +258,15 @@ def render_pipeline(params):
         # AŞAMA 4: draw (Pillow ile 1080x1920 dikey tuval çizimi)
         send_json({"type": "progress", "stage": "draw", "percent": 55, "message": "2D Karikatür tuvali çiziliyor..."})
 
+        # İlk kareden gerçek boyutları oku
+        first_frame_path = os.path.join(frames_raw_dir, raw_files[0])
+        try:
+            from PIL import Image as PILImage
+            with PILImage.open(first_frame_path) as s_img:
+                real_orig_w, real_orig_h = s_img.size
+        except Exception:
+            real_orig_w, real_orig_h = 1920, 1080
+
         for i, fname in enumerate(raw_files):
             det = smoothed_detections[i]
             current_sec = i / 25.0
@@ -272,8 +281,8 @@ def render_pipeline(params):
                 difficulty=difficulty,
                 timer_sec=timer_sec,
                 current_sec=current_sec,
-                orig_w=1920,
-                orig_h=1080
+                orig_w=real_orig_w,
+                orig_h=real_orig_h
             )
 
             out_fpath = os.path.join(frames_out_dir, f"out_{i:05d}.png")

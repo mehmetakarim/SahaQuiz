@@ -67,7 +67,9 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
     const file = e.target.files?.[0];
     if (file) {
       const url = URL.createObjectURL(file);
-      onSelectFile(file.name, file.name, url);
+      // @ts-ignore
+      const realPath = file.path || file.name;
+      onSelectFile(realPath, file.name, url);
     }
   };
 

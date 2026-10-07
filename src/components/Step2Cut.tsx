@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { VideoMetadata } from "../types";
 
 interface Step2CutProps {
   videoName: string;
+  videoUrl?: string | null;
   metadata: VideoMetadata | null;
   inSec: number;
   outSec: number;
@@ -16,6 +17,7 @@ interface Step2CutProps {
 
 export const Step2Cut: React.FC<Step2CutProps> = ({
   videoName,
+  videoUrl,
   metadata,
   inSec,
   outSec,
@@ -27,11 +29,42 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
   onPrevStep,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const duration = metadata?.duration || 13.0;
   const fps = metadata?.fps || 25.0;
   const selectedDuration = Math.max(0, outSec - inSec);
   const isIdealDuration = selectedDuration >= 6.0 && selectedDuration <= 12.0;
+
+  // Video zaman senkronizasyonu
+  useEffect(() => {
+    if (videoRef.current && Math.abs(videoRef.current.currentTime - currentPreviewSec) > 0.15) {
+      videoRef.current.currentTime = currentPreviewSec;
+    }
+  }, [currentPreviewSec]);
+
+  // Video oynatma / durdurma
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.play().catch(() => setIsPlaying(false));
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      const cur = videoRef.current.currentTime;
+      // In-Out döngüsü
+      if (cur >= outSec) {
+        videoRef.current.currentTime = inSec;
+        onChangePreviewSec(inSec);
+      } else {
+        onChangePreviewSec(cur);
+      }
+    }
+  };
 
   // Yakın plan heuristiği (kullanıcı talimatı: oyuncu kutusu > %35 ise rozet göster)
   const hasCloseUpDetected = true; // Heuristik demo/aktif
@@ -131,33 +164,43 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
 
       {/* Workspace Center: Video Preview Monitor + Overlays */}
       <div className="relative w-full rounded-xl bg-surface-container-lowest overflow-hidden shadow-xl aspect-[16/8.7] flex items-center justify-center group border border-outline-variant/30">
-        {/* Yeşil Futbol Sahası Görseli */}
-        <div className="absolute inset-0 bg-[#1F7A3A] flex flex-col justify-between">
-          <div className="w-full h-full relative opacity-90">
-            {/* Taktik Izgara */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
-            {/* Güvenli Oyun Alanı Çizgisi */}
-            <div className="absolute inset-8 rounded border-2 border-white/20 flex flex-col justify-between p-3 pointer-events-none">
-              <div className="flex justify-between items-start">
-                <span className="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-outline">
-                  GÜVENLİ OYUN ALANI (CANVAS REPO)
-                </span>
-                <span className="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-primary-container">
-                  FPS: {fps.toFixed(0)} • 1080p
-                </span>
-              </div>
-              <div className="flex justify-between items-end">
-                <div className="flex items-center gap-1 font-label-sm text-label-sm text-outline bg-surface-container-lowest/80 px-2 py-0.5 rounded">
-                  <span className="w-2 h-2 rounded-full bg-error"></span>
-                  <span>CANLI ÖNİZLEME DÖNGÜSÜ</span>
+        {videoUrl ? (
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            onTimeUpdate={handleTimeUpdate}
+            playsInline
+            className="w-full h-full object-contain bg-black"
+          />
+        ) : (
+          /* Demo Yeşil Futbol Sahası Görseli */
+          <div className="absolute inset-0 bg-[#1F7A3A] flex flex-col justify-between">
+            <div className="w-full h-full relative opacity-90">
+              {/* Taktik Izgara */}
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+              {/* Güvenli Oyun Alanı Çizgisi */}
+              <div className="absolute inset-8 rounded border-2 border-white/20 flex flex-col justify-between p-3 pointer-events-none">
+                <div className="flex justify-between items-start">
+                  <span className="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-outline">
+                    GÜVENLİ OYUN ALANI (CANVAS REPO)
+                  </span>
+                  <span className="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-primary-container">
+                    FPS: {fps.toFixed(0)} • 1080p
+                  </span>
                 </div>
-                <span className="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-outline">
-                  KARE: {Math.floor(currentPreviewSec * fps)} / {Math.floor(duration * fps)}
-                </span>
+                <div className="flex justify-between items-end">
+                  <div className="flex items-center gap-1 font-label-sm text-label-sm text-outline bg-surface-container-lowest/80 px-2 py-0.5 rounded">
+                    <span className="w-2 h-2 rounded-full bg-error"></span>
+                    <span>CANLI ÖNİZLEME DÖNGÜSÜ</span>
+                  </div>
+                  <span className="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-outline">
+                    KARE: {Math.floor(currentPreviewSec * fps)} / {Math.floor(duration * fps)}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Siluet Takip Göstergesi (Oyuncu) */}
         <div className="absolute top-[38%] left-[44%] w-16 h-28 pointer-events-none flex flex-col items-center">
