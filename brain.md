@@ -24,9 +24,10 @@
 
 ## 3. Doğrulama Durumu
 - **Son Doğrulamalar ve Sonuçları:**
-  - `src-tauri/src/lib.rs`: Dinamik `project_root`, mutlak python ve stderr loglama başarıyla eklendi.
-  - `Step1Clip.tsx` & `App.tsx`: Gerçek video yükleme ve Rec.709 video playback bağlandı.
-  - `ffprobe test_output_cartoon.mp4`: `width: 1080`, `height: 1920`, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz).
+  - `Kullanıcı Referans Videosu Render Testi`: `/Users/mehmetakar/Downloads/ssstwitter.com_1791401045081.mp4` üzerinde uçtan uca render başarıyla tamamlandı.
+  - `ffprobe test_user_rendered.mp4`: `width: 1080`, `height: 1920` dikey, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz), süre: 6.00s.
+  - `npm run build`: 0 hata ile TypeScript ve Vite prodüksiyon bundle'ı doğrulandı (10s).
+  - `detect.py`: Centroid tracker ve forma rengi tespiti aktif; oyuncu kimliği korunuyor.
 - **Henüz Doğrulanmamış Noktalar:** Yok.
 
 ---
