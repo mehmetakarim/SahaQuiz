@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"primary-container":"#f5c518","outline":"#9a9078","inverse-surface":"#e0e3e0","on-primary-fixed-variant":"#584400","secondary-fixed-dim":"#81da8e","surface-variant":"#323633","on-secondary-fixed":"#002109","primary-fixed":"#ffe08b","surface-container-lowest":"#0b0f0d","error-container":"#93000a","on-error":"#690005","on-background":"#e0e3e0","on-primary-container":"#695200","surface-container-highest":"#323633","on-primary-fixed":"#241a00","tertiary-fixed":"#9af7aa","secondary-fixed":"#9df7a8","surface-container-high":"#272b29","tertiary-fixed-dim":"#7eda90","error":"#ffb4ab","secondary-container":"#00682b","secondary":"#81da8e","on-secondary":"#003914","surface-tint":"#f0c110","surface-container-low":"#181c1a","on-tertiary-container":"#00632c","surface-bright":"#363a38","primary":"#ffe5a0","tertiary":"#9efcae","surface-container":"#1c201e","on-tertiary-fixed-variant":"#005323","on-tertiary-fixed":"#00210a","on-tertiary":"#003916","surface":"#101412","surface-dim":"#101412","inverse-primary":"#745b00","on-primary":"#3d2f00","on-secondary-fixed-variant":"#005320","primary-fixed-dim":"#f0c110","on-surface-variant":"#d1c5ac","background":"#101412","on-error-container":"#ffdad6","on-surface":"#e0e3e0","on-secondary-container":"#8ce598","inverse-on-surface":"#2d312f","tertiary-container":"#83df94","outline-variant":"#4e4633"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-desktop":"1rem","margin-desktop":"1.25rem","margin":"1rem","space-lg":"1rem","gutter":"0.75rem","space-xl":"1.5rem","space-xs":"0.25rem","space-md":"0.75rem","space-sm":"0.5rem"},"fontFamily":{"label-lg":["JetBrains Mono"],"body-lg":["Work Sans"],"headline-md":["Space Grotesk"],"body-md":["Work Sans"],"headline-sm":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"display-lg":["Space Grotesk"],"body-sm":["Work Sans"],"headline-lg":["Space Grotesk"]},"fontSize":{"label-lg":["13px",{"lineHeight":"16px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-sm":["15px",{"lineHeight":"20px","fontWeight":"600"}],"label-md":["11px",{"lineHeight":"14px","fontWeight":"500"}],"label-sm":["10px",{"lineHeight":"12px","fontWeight":"600"}],"display-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.03em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen"><header class="fixed top-0 left-0 right-0 h-14 bg-surface-container-low/95 backdrop-blur-md border-b border-outline-variant/30 z-50 select-none"><div class="h-14 w-full px-margin-desktop flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5 pr-space-md border-r border-outline-variant/30"><div class="w-3 h-3 rounded-full bg-[#ff5f56] opacity-90 hover:opacity-100 transition-opacity cursor-pointer"></div><div class="w-3 h-3 rounded-full bg-[#ffbd2e] opacity-90 hover:opacity-100 transition-opacity cursor-pointer"></div><div class="w-3 h-3 rounded-full bg-[#27c93f] opacity-90 hover:opacity-100 transition-opacity cursor-pointer"></div></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="SahaQuiz Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WSxsT8y3syOrzsJr9dBG4vnq4WIAt_LU5Eg9a8yA9jAoOU4159pMtNYMyXmyAN4k74X_c_EQfoS3QSu2MKfNkIQaJShA2v2hVSkEAnHIYLA9oIwwSnPKugIr7kRKBqBkRVe0NES58IPgG04cGbAfdISHcSsGptgaCiK_4WDCzT7dp-SZoThn6SO8n60tTA5-asOn8aLQ828Op2e-HaIsP03Elid71H2VmDdlwU_hlU"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">SahaQuiz</span><span class="text-outline-variant">•</span><span class="font-label-md text-label-md text-on-surface-variant truncate max-w-xs">Proje: derbi_gol_ani_2024.mp4</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant/20 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[14px] text-primary-container">memory</span><span class="tracking-wide">Yerel Donanım: CPU / Yerel Motor Aktif (GPU Yok)</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant/20 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[14px] text-secondary">folder</span><span class="tracking-wide font-label-sm truncate max-w-[200px]">Çıktı: ~/Videolar/SahaQuiz/</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-14 bottom-0 w-20 bg-surface-container-low border-r border-outline-variant/30 z-40 flex flex-col justify-between py-space-md select-none"><nav class="flex flex-col items-center gap-space-sm w-full px-space-xs" data-active-classes="bg-primary-container text-on-primary-container"><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="klip" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">movie</span><span class="font-label-sm text-label-sm">1. Klip</span></a><a aria-current="page" class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg transition-colors group bg-primary-container text-on-primary-container" data-path="kes" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">content_cut</span><span class="font-label-sm text-label-sm">2. Kes</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="takimlar" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">shield</span><span class="font-label-sm text-label-sm">3. Takımlar</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="stil" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">palette</span><span class="font-label-sm text-label-sm">4. Stil</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="disa-aktar" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">ios_share</span><span class="font-label-sm text-label-sm">5. Dışa Aktar</span></a></nav><div class="flex flex-col items-center px-space-xs text-center border-t border-outline-variant/20 pt-space-md"><span class="font-label-sm text-label-sm text-outline tracking-tighter leading-tight">Tauri v2.1</span><span class="font-label-sm text-label-sm text-outline-variant text-[9px] mt-0.5">Yerel Çevrimdışı</span></div></aside><div class="pl-20"><main class="relative pt-14 min-h-screen bg-background w-full px-margin-desktop"><div class="flex flex-col w-full pb-10 select-none">
+<!-- Dynamic Sub-header Navigation Context -->
+<div class="w-full flex items-center justify-between py-2 mb-3">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs px-2.5 py-1 rounded bg-surface-container font-label-md text-label-md text-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span>ADIM 2 / 5</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md text-on-surface">Pozisyon Hassas Kırpma</span>
+<span class="font-label-sm text-label-sm text-outline">Derbi_gol_ani_2024.mp4 (50 FPS)</span>
+</div>
+</div>
+<!-- Live Status Pill -->
+<div class="flex items-center gap-space-sm bg-surface-container-high px-3 py-1.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface">Hedef Quiz Kriteri: <strong class="text-secondary">Uyumlu (8.68s)</strong></span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-sm text-label-sm text-outline">Geniş Açı Takip: Aktif</span>
+</div>
+</div>
+<!-- Editorial Info Notice Strip -->
+<div class="w-full mb-3 rounded-lg bg-surface-container-low px-space-md py-2.5 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-7 h-7 rounded bg-primary-container/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container text-[18px]">sports_soccer</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">Quiz için en iyi aralık: tek pozisyon, orta veya geniş açı.</span>
+<span class="font-body-sm text-body-sm text-outline">Hedef kurgu süresi: <strong class="text-on-surface">6.0 – 12.0 sn</strong>. Topun hücum başlangıcından ağlarla buluştuğu ana kadar olan net sekansı belirleyin.</span>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-space-lg text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">KAYNAK UZUNLUĞU</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">00:28.40 (1420 kare)</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">MOTOR MODU</span>
+<span class="font-label-md text-label-md text-secondary">Tauri-FFmpeg Hassas Kesim</span>
+</div>
+</div>
+</div>
+<!-- Workspace Center: Video Preview Monitor + Overlays -->
+<div class="relative w-full rounded-xl bg-surface-container-lowest overflow-hidden shadow-xl aspect-[16/8.7] flex items-center justify-center group">
+<!-- Synthetic Football Broadcast Frame (Placeholder Image) -->
+<img alt="Pozisyon Video Önizleme" class="absolute inset-0 w-full h-full object-cover opacity-90 filter contrast-105" data-alt="Broad television broadcast wide camera shot of a high stakes football match on pristine green grass pitch at night under floodlights. Midfield attack play build up with cartoon aesthetic subtle filter ready for digital vector rotoscoping. Deep stadium atmosphere with crisp chalk sideline boundaries and saturated colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuwHmmNK0x46osyQZwMgYA3Oh6hPSsbnf33yNAOyan1GYisUf6DIeX4P3eeqRb44zS-8L3U1wNzDwtJ-8fI2VzzpAo1QSsSms5nkFVnZFoSzpZ9yv5lorgXZdd7ScfKYkiTUs8EQt8jozqMWG2L4X5_S5bvZwxXptAkniJsxBq3P7i5Par5mkU1Evhmf_jGVKhBP32633Ey57a4a2WvG_kS_2DJoG16ENmKdxnA2U"/>
+<!-- Pitch Tracking Grid / HUD Crosshairs (Tactile Technical Overlay) -->
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="w-full h-full bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]"></div>
+</div>
+<!-- Pitch Inset Bounds Guide for 2D Sprite Mapping -->
+<div class="absolute inset-8 pointer-events-none rounded border-2 border-white/20 flex flex-col justify-between p-3">
+<div class="flex justify-between items-start">
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-outline">GÜVENLİ OYUN ALANI (CANVAS REPO)</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-primary-container">FPS: 50.00 • 1080p</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-outline bg-surface-container-lowest/80 px-2 py-0.5 rounded">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>CANLI ÖNİZLEME DÖNGÜSÜ</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/80 px-1.5 py-0.5 rounded text-outline">KARE: 342 / 434</span>
+</div>
+</div>
+<!-- Centered Dynamic Player Silhouette Tracker Indicator (2D Cartoon Marker Preview) -->
+<div class="absolute top-[38%] left-[44%] w-16 h-28 pointer-events-none flex flex-col items-center">
+<div class="w-full h-full rounded border border-primary-container/80 bg-primary-container/10 flex flex-col justify-between p-1">
+<div class="flex justify-between">
+<span class="w-1.5 h-1.5 bg-primary-container"></span>
+<span class="w-1.5 h-1.5 bg-primary-container"></span>
+</div>
+<div class="flex justify-between">
+<span class="w-1.5 h-1.5 bg-primary-container"></span>
+<span class="w-1.5 h-1.5 bg-primary-container"></span>
+</div>
+</div>
+<div class="mt-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded shadow text-center">
+<span class="font-label-sm text-label-sm text-primary-container tracking-wider uppercase">Hedef Oyuncu #1</span>
+</div>
+</div>
+<!-- Ball Trajectory Vector Dot Preview -->
+<div class="absolute top-[52%] left-[58%] pointer-events-none flex items-center gap-1">
+<div class="w-3.5 h-3.5 rounded-full bg-primary-container shadow-md flex items-center justify-center animate-ping opacity-75"></div>
+<div class="w-3 h-3 rounded-full bg-primary-container -ml-4 shadow"></div>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/90 text-primary-container px-1 rounded ml-1">Top Vektörü</span>
+</div>
+<!-- Smart Face/Number Detection Warning Badge (Right Top) -->
+<div class="absolute top-4 right-4 z-20 max-w-sm rounded-lg bg-surface-container-lowest/95 p-3 shadow-xl backdrop-blur-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container text-[18px]">warning</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary-container">Yakın Plan Tespit Edildi</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.2 rounded bg-surface-container-highest text-primary font-semibold">00:09.15</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">
+            Yüz ve forma numarası <strong class="text-on-surface">3. Takımlar / 2D Sprite</strong> aşamasında anonim karaktere otomatik dönüştürülecektir.
+          </p>
+<div class="mt-2 flex items-center gap-space-sm font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-[14px]">auto_fix_high</span>
+<span>Sprite maskeleme yapay zekası hazır</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Left Current Frame Readout -->
+<div class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-surface-container-lowest/90 px-3 py-1.5 rounded-lg shadow-md">
+<span class="material-symbols-outlined text-secondary text-[16px]">play_circle</span>
+<span class="font-label-lg text-label-lg text-on-surface">00:06.84</span>
+<span class="text-outline-variant">/</span>
+<span class="font-label-md text-label-md text-outline">342. Kare</span>
+</div>
+<!-- Hover Quick Play Overlay Control Button -->
+<button class="absolute w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-transform z-10 cursor-pointer" id="mainPlayOverlayBtn">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<!-- Bottom Workspace: High-Density Precision Filmstrip & Trimmer -->
+<div class="w-full mt-3 rounded-xl bg-surface-container-low p-space-md shadow-lg flex flex-col gap-3">
+<!-- Trimmer Header: Quick Frame Jump Tools + Precision Duration Banner -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<!-- Duration & Range Metrics Card -->
+<div class="flex items-center gap-space-md bg-surface-container px-3 py-1.5 rounded-lg shadow-inner">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<span class="font-label-md text-label-md text-outline uppercase">Seçili Aralık:</span>
+<span class="font-label-lg text-label-lg text-primary font-bold tracking-tight">08.68 sn</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(434 Kare)</span>
+</div>
+<div class="h-4 w-px bg-outline-variant/40"></div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-secondary bg-secondary-container/30 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>İdeal Quiz Aralığı (6-12 sn)</span>
+</div>
+</div>
+<!-- Playback & Frame Stepping Ergonomics Toolbar -->
+<div class="flex items-center gap-1 bg-surface-container-highest p-1 rounded-lg">
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors" id="btnSetIn" title="Giriş Noktası Belirle (I)">
+<span class="font-bold text-primary-container">I</span>
+<span>In Belirle</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-bright text-on-surface transition-colors flex items-center justify-center" id="btnPrevFrame" title="1 Kare Geri (-1 Frame)">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span class="font-label-sm text-label-sm -ml-0.5">1k</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1 rounded bg-primary-container text-on-primary-container font-headline-sm text-headline-sm hover:opacity-95 active:scale-95 transition-all" id="btnPlayPause" title="Oynat / Durdur (Boşluk Tuşu)">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+<span class="font-label-md text-label-md font-bold">Durdur</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-bright text-on-surface transition-colors flex items-center justify-center" id="btnNextFrame" title="1 Kare İleri (+1 Frame)">
+<span class="font-label-sm text-label-sm -mr-0.5">1k</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors" id="btnSetOut" title="Çıkış Noktası Belirle (O)">
+<span class="font-bold text-primary-container">O</span>
+<span>Out Belirle</span>
+</button>
+</div>
+<!-- Timecode Explicit Numeric Readouts -->
+<div class="flex items-center gap-space-sm font-label-md text-label-md">
+<div class="flex items-center gap-1 bg-surface-container px-2 py-1 rounded text-on-surface">
+<span class="text-outline text-label-sm">IN:</span>
+<span class="font-semibold text-primary">00:04.12</span>
+</div>
+<span class="text-outline-variant">→</span>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-1 rounded text-on-surface">
+<span class="text-outline text-label-sm">OUT:</span>
+<span class="font-semibold text-primary">00:12.80</span>
+</div>
+</div>
+</div>
+<!-- Timeline Scrubber & Filmstrip Module -->
+<div class="relative w-full rounded-lg bg-surface-container-lowest p-2 overflow-hidden shadow-inner flex flex-col gap-1.5 select-none">
+<!-- Micro Frame Numbers / Time Tick Ruler -->
+<div class="w-full h-4 flex justify-between font-label-sm text-[9px] text-outline px-1">
+<span>00:00.00</span>
+<span>00:04.00</span>
+<span>00:08.00</span>
+<span class="text-primary font-bold">00:12.00</span>
+<span>00:16.00</span>
+<span>00:20.00</span>
+<span>00:24.00</span>
+<span>00:28.40</span>
+</div>
+<!-- Visual Filmstrip Track Container -->
+<div class="relative w-full h-24 rounded bg-surface-container overflow-hidden flex items-center shadow-sm">
+<!-- Filmstrip Continuous Frames (Simulated Video Keyframe Strip) -->
+<div class="absolute inset-0 grid grid-cols-12 gap-0.5 opacity-60 pointer-events-none">
+<!-- Frame 1 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-01" class="w-full h-full object-cover grayscale brightness-75" data-alt="Micro football match thumbnail wide pitch camera kickoff play action derbi match preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgzyZs3AfrqJkq9fN7faFuB21jIr-FFWsgWSS5aJ7mbeamWAiNGcFhtf9RM60EKSFuCrPosg6s6L-cWgLicOEZydN1f8IS-Zftn-ujoNAAymbryadqg79JRZatH8HPJ4x11IBiWmvqkMxcBoUmYXafXeU5xvz6DZ0dG5Tlag1smHcZIQCRNWgx8a65yAGZoy5uFVNn14OQcc6uOKWB1hbphBKJavVBuzj8XA9WKKU"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:01</span>
+</div>
+<!-- Frame 2 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-02" class="w-full h-full object-cover grayscale brightness-75" data-alt="Micro football match thumbnail defensive pass midfield transition fast attack play derbi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz9w4U3IDyXRizZJBRpNnQuN4mBeVlqgkflhWDwZz3w7pvq1d1YlD8gPlyb6HCldirJBmw7QaEz5g3zIKo_k8YT5KqLW5DWFyGjF_xRl0hMChF4xsvV-rhtq9xQd9a1qf1lNMu-XFeLrcKup7FXASxYQNZJfkARkZYl6sJJIqhCU1xOEPDr5HZQ_ZSSuAKG3iG1neRCePdQuzcwaqy3cgSeT9u4juFyiLTK2uL8KY"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:03</span>
+</div>
+<!-- Frame 3 (In-Range Start) -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-03" class="w-full h-full object-cover" data-alt="Micro football match thumbnail forward cross sprint through line wide broadcast view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtKiBriTR2mDdwRr723H74-OqdwlXSi13DbtJ1UlAmx3Eb0wSnA6orZQCOzq_cwSgNgvN3py7ISCV3ZC-Er5S8YrE-JspWEf8ILvkyiuWJIl8XOscA_i1TjHvfyfAn0I_vI7xnC7LUW3UxS2iKdkJ6Rco_401ePIdYoH7f7hTlk1wnIBRFFdBuJ55-oPPKggjnD4JVcDfm3FQk4ZgijEH0MGRkkQ5_GhHhDn7c-m0"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-primary">00:04</span>
+</div>
+<!-- Frame 4 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-04" class="w-full h-full object-cover" data-alt="Micro football match thumbnail through ball passing to striker penalty box edge derbi sequence" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0OjmQwfltgfw1ESxBgB8zQFYJLsJCeKYWnU66K5ZPe9BJMFcUnldjr13L-ioKsZ8pR_KkS3lZT3BulpjCnGIUDnBvwMcX__hRL5wHdBp-KSK9GhGuGi4CVBRmvZ0ezku2xMccy4qM9eAKWyy-quiHwvx4HYR3wXo9wTx38BnywK8s3ajx0E5T_ZCMGJJhTTpAcOsIBrD5mf2zZ2LWYm2LOyWV8JOGxwN6adbtDyk"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:06</span>
+</div>
+<!-- Frame 5 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-05" class="w-full h-full object-cover" data-alt="Micro football match thumbnail striker taking shot on goal derbi match intense football action" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZpaiYjS1LAoUr7U4YfzrC97jUCR3HBYKjplZqLfePYN8s1nSHIBtKJAd8IPjsoQuWHkTLYSB7WQGgre3aB9NSMxot6rJSbvG3MUP6HChXFmQBgNz5sX_ictBO28GwECBw3RrhHPa-dczQkLfgQQs8dBXY4n65gYSYBimNoF375m45zLJr0hrnjzxFtoDG_KZNRZykeDm7DnxMpIB0Al-3JPSK7GgwxY7lX7srrD0"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:08</span>
+</div>
+<!-- Frame 6 (Close-up Detected Frame) -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-06" class="w-full h-full object-cover" data-alt="Micro football match thumbnail medium close up player reaction movement derbi football match" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4gR4O0bPibWioU3vNe79m4a1_2SM6ezjzvLW_l6Tm2UGVkOjTjxw8ydS22YlAK4V67IyBz5plKGS50Lc3UsOGQAAdNVYob7lNkzACH2b1x8ebFJuIseJawJYfM_E_steWs8RhryigtOIdognktMLOJcctOdg6x1Mgc9yaeMAyz8LyDwT1FEgP4napotnoNJ3W-Tq0K5n_WMyd7N3GJrXcKg_Aa7z1GLX-IjBM6pk"/>
+<div class="absolute inset-0 bg-primary-container/20 border-b-2 border-primary-container"></div>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-primary-container text-black font-bold px-0.5 rounded">00:09 Yakın</span>
+</div>
+<!-- Frame 7 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-07" class="w-full h-full object-cover" data-alt="Micro football match thumbnail goalkeeper dive football ball flying to top corner net derbi goal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAELWFHNAPHdUq9YgtdxiGuE-uXfjYTH7j5kQireD8lDtkMrs8KRy83Z-Q8Ljz-msRURM7GixGTLuFPmyhlWVHMaCCUOCMdqDp7jalDd9u0U_lyRIMeUsR5lBXB74BbNZXe8njlWzVeIbYjwmGDf7sx8KjK1RmLSmyHv_Ir3LnBNAXdGX0kJiYa_NaLpWeCuk_TD5GMUNjrjI6GHAMQgz8-0PaUQooF2WGz2cXbRdg"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:11</span>
+</div>
+<!-- Frame 8 (Out-Range End) -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-08" class="w-full h-full object-cover" data-alt="Micro football match thumbnail ball shaking goal net wide celebratory stadium shot derbi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBwtD2NP73jXFJ_eGPIw2ltAK0qA9Zv-OJsSoNyaQMqsEf4-LcSvpk8K5AE26_R1I9R1qGOAiu-VNEj4S1U7b8dI1ARPrUnXiLVNB0xaRsZOBp7K57ZgtRtl3fxWQ_CpeEYZ_4FDlMM1JTqmvxdEW4VGyrdOieV0VUOJO5CDs_8FQMG8vao8Yf2Hn_n-oFfZFTLWKHGbrUEObb6crbSvrGblRTaP1EZYFhUckCKw0"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-primary">00:12</span>
+</div>
+<!-- Frame 9 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-09" class="w-full h-full object-cover grayscale brightness-75" data-alt="Micro football match thumbnail player running towards corner flag derbi goal celebration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa5sYj6VpxOgFwaY2BIVJIv-r7Iyk5yf-c1zinoHkvY2PxvDJ_-HrDsRUGzXTrJtKD94gUR6_8xC2yJBaKyuhrF6ODS4QeYbVMALqPW3n21kd-wCRCwTbZ1LH23AihQDGWFgkOnhVyCTlLxworYLCENWXooEQJOPd4dmzhW8j8aqbeZYI4LzdVF1wSFTslyNrv5OhybQ8DP_fyJzDvsYp0bwNFtEuIGRRbQvRPGdg"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:15</span>
+</div>
+<!-- Frame 10 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-10" class="w-full h-full object-cover grayscale brightness-75" data-alt="Micro football match thumbnail team celebration hugging derbi football match" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZno-fwN06RDg9LPlmycs-K0zH1dHRK9HQZgDAmYcZBwmViDhsss_ED8QN9_KCqnkxof7QiiFJLnPUPXJOPcS2XqrSlt6Gsy7ZaBCag7KFqhounoOLkNZNA7MMNX6EzA2yT8rd-sCcZt7qgXh6bdsb_bg7KNiYIwiW2bChr85NwXK_sbL1KC6ARIMxeGI5U8Lz6DBf7OrNBVQuIaohRVBhvHFy1flbqK_-FmiTt_g"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:19</span>
+</div>
+<!-- Frame 11 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-11" class="w-full h-full object-cover grayscale brightness-75" data-alt="Micro football match thumbnail referee blowing whistle midfield derbi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeGMQOiLgs970J58VZWsiY7Kk-_wzxeR7JhDdSH5T9SBjYvPVU5uXryvVmJ_jgCMrgkQJFrQyOToL5tbJC1TxFutejG3iwZFRSXQz5Q1HwYZDxcjcXmBAHuhsZv87y2OYu8Oh5GgHqkzTlqI_Ukon_u1RktVOATy4C5_GQwZV_o0jZbaLIwdjUUOCX-2ezgi7RezZuHcemNyqKqQlLXUYC-8ikWpuUTVBqgmRAK6U"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:23</span>
+</div>
+<!-- Frame 12 -->
+<div class="relative h-full bg-surface-variant overflow-hidden">
+<img alt="kare-12" class="w-full h-full object-cover grayscale brightness-75" data-alt="Micro football match thumbnail stadium grandstand flare smoke derbi atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcTpQQz2cxzFx7s1Cw54Xo-jUwU9DJARv5KL6K-WoYqSnB1BWpJv1WSY3jtiiOZaXpQhlXPqpGsxCoPGpeggyUcTF7Dkk1qr-Ggk5ED-03RoII4Xk8FbpNy77PZmRcLYJER9wWqWPGV1pO3vQJ4W5U1BTUEKiEfBbTznOkTuOTL7DEptuEh1EZ5yVAiFUCRhk9CE-QozwoxI3fwYXks-3Q0o_xRYSbEBgvnGtyfTk"/>
+<span class="absolute bottom-1 left-1 font-label-sm text-[8px] bg-black/80 px-0.5 rounded text-white">00:28</span>
+</div>
+</div>
+<!-- Dimmed Non-Selected Regions (Left Dim & Right Dim) -->
+<div class="absolute left-0 top-0 bottom-0 w-[14.5%] bg-surface-container-lowest/85 backdrop-blur-[1px] z-10 pointer-events-none"></div>
+<div class="absolute right-0 top-0 bottom-0 w-[54.8%] bg-surface-container-lowest/85 backdrop-blur-[1px] z-10 pointer-events-none"></div>
+<!-- ACTIVE TRIM HIGHLIGHT REGION (Selected Quiz Window: 00:04.12 - 00:12.80) -->
+<div class="absolute left-[14.5%] right-[54.8%] top-0 bottom-0 bg-primary-container/20 z-10 pointer-events-none">
+<!-- Audio Waveform Mockup within active clip -->
+<div class="w-full h-6 absolute bottom-1 left-0 flex items-end gap-[2px] px-1 opacity-75">
+<span class="w-[3px] h-2 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-3 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-1 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-4 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-5 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-3 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-2 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-6 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-5 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-3 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-2 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-4 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-6 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-5 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-2 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-3 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-5 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-4 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-1 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-3 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-2 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-5 bg-primary-container rounded-t"></span>
+<span class="w-[3px] h-4 bg-primary-container rounded-t"></span>
+</div>
+</div>
+<!-- LEFT TRIM HANDLE (IN: 00:04.12) -->
+<div class="absolute left-[14.5%] top-0 bottom-0 z-30 flex items-center cursor-ew-resize">
+<!-- Floating Micro Timecode Balloon -->
+<div class="absolute -top-7 -left-12 bg-primary-container text-on-primary-container px-2 py-0.5 rounded shadow-xl flex items-center gap-1 font-label-sm text-label-sm font-bold whitespace-nowrap">
+<span class="material-symbols-outlined text-[12px]">start</span>
+<span>00:04.12 (210. kare)</span>
+</div>
+<!-- Heavy Yellow Handle Bar -->
+<div class="w-4 h-full bg-primary-container rounded-l flex flex-col justify-center items-center shadow-lg hover:brightness-110">
+<div class="w-1 h-5 flex flex-col justify-between">
+<span class="w-full h-0.5 bg-on-primary-container rounded"></span>
+<span class="w-full h-0.5 bg-on-primary-container rounded"></span>
+<span class="w-full h-0.5 bg-on-primary-container rounded"></span>
+</div>
+</div>
+</div>
+<!-- RIGHT TRIM HANDLE (OUT: 00:12.80) -->
+<div class="absolute right-[54.8%] top-0 bottom-0 z-30 flex items-center cursor-ew-resize">
+<!-- Floating Out Balloon -->
+<div class="absolute -top-7 -right-8 bg-surface-container-highest text-on-surface px-2 py-0.5 rounded shadow-xl flex items-center gap-1 font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span>00:12.80 (644. kare)</span>
+<span class="material-symbols-outlined text-[12px] text-primary-container">sports_score</span>
+</div>
+<!-- Heavy Yellow Handle Bar -->
+<div class="w-4 h-full bg-primary-container rounded-r flex flex-col justify-center items-center shadow-lg hover:brightness-110">
+<div class="w-1 h-5 flex flex-col justify-between">
+<span class="w-full h-0.5 bg-on-primary-container rounded"></span>
+<span class="w-full h-0.5 bg-on-primary-container rounded"></span>
+<span class="w-full h-0.5 bg-on-primary-container rounded"></span>
+</div>
+</div>
+</div>
+<!-- CURRENT PLAYHEAD SCRUBBER (At 00:06.84) -->
+<div class="absolute left-[24.2%] top-0 bottom-0 z-40 flex flex-col items-center pointer-events-none">
+<!-- Yellow Inverted Scrubber Head Pin -->
+<div class="w-3.5 h-3.5 bg-primary-container rotate-45 -mt-1.5 shadow-md"></div>
+<!-- Crisp 1px Chalk Guideline Cutting Across Track -->
+<div class="w-[2px] h-full bg-primary-container"></div>
+</div>
+</div>
+<!-- Quick Timeline Utility Hints -->
+<div class="flex items-center justify-between text-outline text-[11px] font-label-sm px-1 pt-0.5">
+<div class="flex items-center gap-3">
+<span><kbd class="px-1 py-0.5 rounded bg-surface-container font-mono text-[9px] text-on-surface">I</kbd> Başlangıç Noktası</span>
+<span><kbd class="px-1 py-0.5 rounded bg-surface-container font-mono text-[9px] text-on-surface">O</kbd> Bitiş Noktası</span>
+<span><kbd class="px-1 py-0.5 rounded bg-surface-container font-mono text-[9px] text-on-surface">Boşluk</kbd> Oynat/Durdur</span>
+<span><kbd class="px-1 py-0.5 rounded bg-surface-container font-mono text-[9px] text-on-surface">← / →</kbd> Hassas Kare Atla</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>Kayıpsız Segmentasyon (Stream Copy)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Navigation Action Dock -->
+<div class="w-full mt-4 flex items-center justify-between pt-3 border-t border-outline-variant/20">
+<a class="flex items-center gap-space-sm px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-headline-sm text-headline-sm transition-all shadow-sm" data-path="klip" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Geri: Klip Seçimi</span>
+</a>
+<div class="flex items-center gap-space-md">
+<div class="hidden sm:flex flex-col text-right">
+<span class="font-label-sm text-label-sm text-outline">Hazır Pozisyon Kesiti</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">8.68 sn / Full HD 1080p</span>
+</div>
+<a class="flex items-center gap-space-sm px-6 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-headline-md text-headline-md font-bold hover:brightness-105 active:scale-98 transition-all shadow-lg" data-path="takimlar" href="#">
+<span>3. Adıma Geç: Takımlar</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  (function initTrimmerInteractions() {
+    const playPauseBtn = document.getElementById('btnPlayPause');
+    const mainPlayOverlayBtn = document.getElementById('mainPlayOverlayBtn');
+    let isPlaying = true;
+
+    function togglePlayback() {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        if (playPauseBtn) {
+          playPauseBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+            <span class="font-label-md text-label-md font-bold">Durdur</span>
+          `;
+        }
+        if (mainPlayOverlayBtn) {
+          mainPlayOverlayBtn.classList.add('opacity-0');
+        }
+      } else {
+        if (playPauseBtn) {
+          playPauseBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            <span class="font-label-md text-label-md font-bold">Oynat</span>
+          `;
+        }
+        if (mainPlayOverlayBtn) {
+          mainPlayOverlayBtn.classList.remove('opacity-0');
+        }
+      }
+    }
+
+    if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayback);
+    if (mainPlayOverlayBtn) mainPlayOverlayBtn.addEventListener('click', togglePlayback);
+
+    // Keyboard Shortcuts for desktop feel (I, O, Space)
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlayback();
+      }
+    });
+  })();
+</script></main></div></body></html>

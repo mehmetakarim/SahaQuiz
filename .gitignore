@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Production build
+dist
+dist-ssr
+build
+
+# Tauri build artifacts
+src-tauri/target
+
+# Python virtual environment & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# YOLO weights & large cache
+models/*.pt
+models/*.onnx
+
+# Temporary processing files
+tmp/
+temp/
+*.tmp
+.DS_Store

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"primary-container":"#f5c518","outline":"#9a9078","inverse-surface":"#e0e3e0","on-primary-fixed-variant":"#584400","secondary-fixed-dim":"#81da8e","surface-variant":"#323633","on-secondary-fixed":"#002109","primary-fixed":"#ffe08b","surface-container-lowest":"#0b0f0d","error-container":"#93000a","on-error":"#690005","on-background":"#e0e3e0","on-primary-container":"#695200","surface-container-highest":"#323633","on-primary-fixed":"#241a00","tertiary-fixed":"#9af7aa","secondary-fixed":"#9df7a8","surface-container-high":"#272b29","tertiary-fixed-dim":"#7eda90","error":"#ffb4ab","secondary-container":"#00682b","secondary":"#81da8e","on-secondary":"#003914","surface-tint":"#f0c110","surface-container-low":"#181c1a","on-tertiary-container":"#00632c","surface-bright":"#363a38","primary":"#ffe5a0","tertiary":"#9efcae","surface-container":"#1c201e","on-tertiary-fixed-variant":"#005323","on-tertiary-fixed":"#00210a","on-tertiary":"#003916","surface":"#101412","surface-dim":"#101412","inverse-primary":"#745b00","on-primary":"#3d2f00","on-secondary-fixed-variant":"#005320","primary-fixed-dim":"#f0c110","on-surface-variant":"#d1c5ac","background":"#101412","on-error-container":"#ffdad6","on-surface":"#e0e3e0","on-secondary-container":"#8ce598","inverse-on-surface":"#2d312f","tertiary-container":"#83df94","outline-variant":"#4e4633"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-desktop":"1rem","margin-desktop":"1.25rem","margin":"1rem","space-lg":"1rem","gutter":"0.75rem","space-xl":"1.5rem","space-xs":"0.25rem","space-md":"0.75rem","space-sm":"0.5rem"},"fontFamily":{"label-lg":["JetBrains Mono"],"body-lg":["Work Sans"],"headline-md":["Space Grotesk"],"body-md":["Work Sans"],"headline-sm":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"display-lg":["Space Grotesk"],"body-sm":["Work Sans"],"headline-lg":["Space Grotesk"]},"fontSize":{"label-lg":["13px",{"lineHeight":"16px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-lg":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-md":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-md":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-sm":["15px",{"lineHeight":"20px","fontWeight":"600"}],"label-md":["11px",{"lineHeight":"14px","fontWeight":"500"}],"label-sm":["10px",{"lineHeight":"12px","fontWeight":"600"}],"display-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.03em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen"><header class="fixed top-0 left-0 right-0 h-14 bg-surface-container-low/95 backdrop-blur-md border-b border-outline-variant/30 z-50 select-none"><div class="h-14 w-full px-margin-desktop flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5 pr-space-md border-r border-outline-variant/30"><div class="w-3 h-3 rounded-full bg-[#ff5f56] opacity-90 hover:opacity-100 transition-opacity cursor-pointer"></div><div class="w-3 h-3 rounded-full bg-[#ffbd2e] opacity-90 hover:opacity-100 transition-opacity cursor-pointer"></div><div class="w-3 h-3 rounded-full bg-[#27c93f] opacity-90 hover:opacity-100 transition-opacity cursor-pointer"></div></div><div class="flex items-center gap-space-sm pl-space-xs"><img alt="SahaQuiz Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WSxsT8y3syOrzsJr9dBG4vnq4WIAt_LU5Eg9a8yA9jAoOU4159pMtNYMyXmyAN4k74X_c_EQfoS3QSu2MKfNkIQaJShA2v2hVSkEAnHIYLA9oIwwSnPKugIr7kRKBqBkRVe0NES58IPgG04cGbAfdISHcSsGptgaCiK_4WDCzT7dp-SZoThn6SO8n60tTA5-asOn8aLQ828Op2e-HaIsP03Elid71H2VmDdlwU_hlU"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">SahaQuiz</span><span class="text-outline-variant">•</span><span class="font-label-md text-label-md text-on-surface-variant truncate max-w-xs">Proje: derbi_gol_ani_2024.mp4</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant/20 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[14px] text-primary-container">memory</span><span class="tracking-wide">Yerel Donanım: CPU / Yerel Motor Aktif (GPU Yok)</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant/20 font-label-sm text-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-[14px] text-secondary">folder</span><span class="tracking-wide font-label-sm truncate max-w-[200px]">Çıktı: ~/Videolar/SahaQuiz/</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-14 bottom-0 w-20 bg-surface-container-low border-r border-outline-variant/30 z-40 flex flex-col justify-between py-space-md select-none"><nav class="flex flex-col items-center gap-space-sm w-full px-space-xs" data-active-classes="bg-primary-container text-on-primary-container"><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="klip" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">movie</span><span class="font-label-sm text-label-sm">1. Klip</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="kes" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">content_cut</span><span class="font-label-sm text-label-sm">2. Kes</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="takimlar" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">shield</span><span class="font-label-sm text-label-sm">3. Takımlar</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="stil" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">palette</span><span class="font-label-sm text-label-sm">4. Stil</span></a><a class="w-full flex flex-col items-center justify-center py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors group" data-path="disa-aktar" href="#"><span class="material-symbols-outlined text-[20px] mb-0.5">ios_share</span><span class="font-label-sm text-label-sm">5. Dışa Aktar</span></a></nav><div class="flex flex-col items-center px-space-xs text-center border-t border-outline-variant/20 pt-space-md"><span class="font-label-sm text-label-sm text-outline tracking-tighter leading-tight">Tauri v2.1</span><span class="font-label-sm text-label-sm text-outline-variant text-[9px] mt-0.5">Yerel Çevrimdışı</span></div></aside><div class="pl-20"><main class="relative pt-14 min-h-screen bg-background w-full px-margin-desktop"><div class="flex flex-col w-full pb-12">
+<div class="flex items-center justify-between py-space-md mb-space-md bg-surface-container-low px-space-lg rounded-xl shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md font-bold shadow-sm">
+        3
+      </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Aşama 3 / 5</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">2D Vektör Motoru v2.4</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Takım Kitleri &amp; Karikatür Önizleme</h1>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-lg shadow-inner">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-md text-label-md text-on-surface">Canlı Render: 60 FPS</span>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-space-md py-1.5 rounded-lg font-label-md text-label-md">
+        Klip: derbi_gol_ani_2024.mp4
+      </div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-space-lg">
+<div class="col-span-12 xl:col-span-6 flex flex-col gap-space-lg">
+<div class="bg-surface-container rounded-xl p-space-lg shadow-lg relative overflow-hidden">
+<div class="flex items-center justify-between pb-space-sm mb-space-md bg-surface-container-high px-space-md py-space-xs rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-3.5 h-3.5 rounded-full bg-[#E52525] shadow-sm"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Ev Sahibi Takım</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant uppercase tracking-wider">Hücum</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-mono" id="home-label-summary">Sarı - Kırmızı</span>
+</div>
+<div class="mb-space-md">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-space-xs uppercase tracking-wider">Hızlı Kulüp Paletleri</div>
+<div class="flex flex-wrap gap-space-xs">
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyHomePreset('#DE0B1E', '#FDB913', '#FFFFFF', 'Sarı - Kırmızı')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#DE0B1E]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FDB913]"></span></span>
+<span>Sarı-Kırmızı</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyHomePreset('#002D62', '#FFE000', '#002D62', 'Lacivert - Sarı')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#002D62]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFE000]"></span></span>
+<span>Lacivert-Sarı</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyHomePreset('#111111', '#FFFFFF', '#111111', 'Siyah - Beyaz')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#111111]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]"></span></span>
+<span>Siyah-Beyaz</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyHomePreset('#800020', '#6BA4B8', '#800020', 'Bordo - Mavi')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#800020]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#6BA4B8]"></span></span>
+<span>Bordo-Mavi</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyHomePreset('#E30613', '#FFFFFF', '#E30613', 'Kırmızı - Beyaz')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#E30613]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]"></span></span>
+<span>Kırmızı-Beyaz</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-lg mb-space-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>Forma</span>
+<span class="font-mono text-[10px]" id="home-shirt-val">#DE0B1E</span>
+</span>
+<div class="flex items-center gap-space-xs">
+<input class="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shadow-sm" id="home-shirt-color" oninput="updateTeamColors()" type="color" value="#DE0B1E"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Ana Renk</span>
+<span class="font-label-sm text-label-sm text-outline">Gövde &amp; Kol</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>Şort</span>
+<span class="font-mono text-[10px]" id="home-shorts-val">#FDB913</span>
+</span>
+<div class="flex items-center gap-space-xs">
+<input class="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shadow-sm" id="home-shorts-color" oninput="updateTeamColors()" type="color" value="#FDB913"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Alt Renk</span>
+<span class="font-label-sm text-label-sm text-outline">Klasik Şort</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>Çorap</span>
+<span class="font-mono text-[10px]" id="home-socks-val">#FFFFFF</span>
+</span>
+<div class="flex items-center gap-space-xs">
+<input class="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shadow-sm" id="home-socks-color" oninput="updateTeamColors()" type="color" value="#FFFFFF"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Tozluk</span>
+<span class="font-label-sm text-label-sm text-outline">Diz Çorabı</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-high px-space-md py-space-sm rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">sports_soccer</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-sm">Kaleci Özel Forması</span>
+<span class="font-body-sm text-body-sm text-outline">Fosforlu Yeşil / Neon Sarı sprite gövdesi</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="home-gk-toggle" onchange="updateGKStatus()" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-space-lg shadow-lg relative overflow-hidden">
+<div class="flex items-center justify-between pb-space-sm mb-space-md bg-surface-container-high px-space-md py-space-xs rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="w-3.5 h-3.5 rounded-full bg-[#0055FF] shadow-sm"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Deplasman Takımı</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant uppercase tracking-wider">Savunma</span>
+</div>
+<span class="font-label-md text-label-md text-secondary font-mono" id="away-label-summary">Lacivert - Beyaz</span>
+</div>
+<div class="mb-space-md">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-space-xs uppercase tracking-wider">Hızlı Kulüp Paletleri</div>
+<div class="flex flex-wrap gap-space-xs">
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyAwayPreset('#00205B', '#FFFFFF', '#00205B', 'Lacivert - Beyaz')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#00205B]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]"></span></span>
+<span>Lacivert-Beyaz</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyAwayPreset('#FFFFFF', '#111111', '#FFFFFF', 'Beyaz - Siyah')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#111111]"></span></span>
+<span>Beyaz-Siyah</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyAwayPreset('#E30613', '#E30613', '#FFFFFF', 'Tam Kırmızı')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#E30613]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]"></span></span>
+<span>Tam Kırmızı</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyAwayPreset('#00682B', '#FFFFFF', '#00682B', 'Yeşil - Beyaz')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#00682B]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]"></span></span>
+<span>Yeşil-Beyaz</span>
+</button>
+<button class="preset-btn px-2.5 py-1 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-all shadow-sm" onclick="applyAwayPreset('#FF7900', '#000000', '#FF7900', 'Turuncu - Siyah')">
+<span class="flex -space-x-1"><span class="w-2.5 h-2.5 rounded-full bg-[#FF7900]"></span><span class="w-2.5 h-2.5 rounded-full bg-[#000000]"></span></span>
+<span>Turuncu-Siyah</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-md bg-surface-container-low p-space-md rounded-lg mb-space-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>Forma</span>
+<span class="font-mono text-[10px]" id="away-shirt-val">#00205B</span>
+</span>
+<div class="flex items-center gap-space-xs">
+<input class="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shadow-sm" id="away-shirt-color" oninput="updateTeamColors()" type="color" value="#00205B"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Ana Renk</span>
+<span class="font-label-sm text-label-sm text-outline">Gövde &amp; Kol</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>Şort</span>
+<span class="font-mono text-[10px]" id="away-shorts-val">#FFFFFF</span>
+</span>
+<div class="flex items-center gap-space-xs">
+<input class="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shadow-sm" id="away-shorts-color" oninput="updateTeamColors()" type="color" value="#FFFFFF"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Alt Renk</span>
+<span class="font-label-sm text-label-sm text-outline">Klasik Şort</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-between">
+<span>Çorap</span>
+<span class="font-mono text-[10px]" id="away-socks-val">#00205B</span>
+</span>
+<div class="flex items-center gap-space-xs">
+<input class="w-10 h-10 rounded cursor-pointer bg-transparent border-0 p-0 shadow-sm" id="away-socks-color" oninput="updateTeamColors()" type="color" value="#00205B"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Tozluk</span>
+<span class="font-label-sm text-label-sm text-outline">Diz Çorabı</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-high px-space-md py-space-sm rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">sports_soccer</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-sm">Kaleci Özel Forması</span>
+<span class="font-body-sm text-body-sm text-outline">Koyu Fuşya / Parlak Turuncu savunma bekçisi</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="away-gk-toggle" onchange="updateGKStatus()" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-start gap-space-md shadow-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-outline-variant shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px] text-primary">verified_user</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1.5">
+<span>Numara Çizme / Anonimleştirme</span>
+<span class="material-symbols-outlined text-[16px] text-outline">lock</span>
+</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-bold">KİLİTLİ &amp; AÇIK</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+            Telif &amp; Quiz Kuralı: Format kuralları gereği forma sırt ve göğüs numaraları otomatik olarak gizlenir. İzleyicinin futbolcuyu sadece hareket ve pozisyondan tahmin etmesi sağlanır.
+          </p>
+</div>
+</div>
+</div>
+<div class="col-span-12 xl:col-span-6 flex flex-col gap-space-md">
+<div class="bg-surface-container rounded-xl p-space-lg shadow-xl flex flex-col h-full">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[20px]">stadium</span>
+<span class="font-headline-md text-headline-md text-on-surface">Canlı Mini Saha &amp; 2D Karikatür Sprite</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-highest px-space-sm py-1 rounded font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-primary-container">animation</span>
+<span>Mikro Zıplama Aktif</span>
+</div>
+</div>
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl flex items-center justify-center select-none bg-[#1F7A3A]">
+<div class="absolute inset-0 flex">
+<div class="w-1/8 h-full bg-[#1F7A3A]"></div>
+<div class="w-1/8 h-full bg-[#2E8B4A]"></div>
+<div class="w-1/8 h-full bg-[#1F7A3A]"></div>
+<div class="w-1/8 h-full bg-[#2E8B4A]"></div>
+<div class="w-1/8 h-full bg-[#1F7A3A]"></div>
+<div class="w-1/8 h-full bg-[#2E8B4A]"></div>
+<div class="w-1/8 h-full bg-[#1F7A3A]"></div>
+<div class="w-1/8 h-full bg-[#2E8B4A]"></div>
+</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="4" viewbox="0 0 800 600">
+<rect height="540" rx="4" width="740" x="30" y="30"></rect>
+<line stroke-width="3" x1="400" x2="400" y1="30" y2="570"></line>
+<circle cx="400" cy="300" r="70" stroke-width="3"></circle>
+<circle cx="400" cy="300" fill="rgba(255,255,255,0.8)" r="4" stroke="none"></circle>
+<rect height="280" stroke-width="3" width="130" x="30" y="160"></rect>
+<rect height="160" stroke-width="3" width="50" x="30" y="220"></rect>
+<path d="M 160 250 A 60 60 0 0 1 160 350" stroke-width="3"></path>
+<circle cx="110" cy="300" fill="rgba(255,255,255,0.8)" r="4" stroke="none"></circle>
+<rect height="280" stroke-width="3" width="130" x="640" y="160"></rect>
+<rect height="160" stroke-width="3" width="50" x="720" y="220"></rect>
+<path d="M 640 250 A 60 60 0 0 0 640 350" stroke-width="3"></path>
+<circle cx="690" cy="300" fill="rgba(255,255,255,0.8)" r="4" stroke="none"></circle>
+<path d="M 30 50 A 20 20 0 0 0 50 30" stroke-width="3"></path>
+<path d="M 30 550 A 20 20 0 0 1 50 570" stroke-width="3"></path>
+<path d="M 770 50 A 20 20 0 0 1 750 30" stroke-width="3"></path>
+<path d="M 770 550 A 20 20 0 0 0 750 570" stroke-width="3"></path>
+</svg>
+<!-- 2D CARTOON PLAYERS SVG RENDER -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" id="pitch-sprites-layer" viewbox="0 0 800 600">
+<defs>
+<filter height="140%" id="cartoon-shadow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="8" flood-color="#000000" flood-opacity="0.45" stddeviation="4"></fedropshadow>
+</filter>
+</defs>
+<!-- HAKEM -->
+<g class="animate-bounce" style="animation-duration: 2.2s;" transform="translate(380, 210)">
+<ellipse cx="20" cy="54" fill="rgba(0,0,0,0.35)" rx="14" ry="4"></ellipse>
+<rect fill="#111111" height="14" rx="2" stroke="#000" stroke-width="2.5" width="5" x="13" y="38"></rect>
+<rect fill="#111111" height="14" rx="2" stroke="#000" stroke-width="2.5" width="5" x="22" y="38"></rect>
+<rect fill="#111111" height="13" rx="2" stroke="#000" stroke-width="2.5" width="18" x="11" y="27"></rect>
+<path d="M 8 13 L 32 13 L 30 29 L 10 29 Z" fill="#FFE000" stroke="#000" stroke-width="3"></path>
+<line stroke="#000" stroke-width="2.5" x1="16" x2="16" y1="13" y2="29"></line>
+<line stroke="#000" stroke-width="2.5" x1="24" x2="24" y1="13" y2="29"></line>
+<circle cx="20" cy="7" fill="#FCD5B5" r="8.5" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- EV SAHİBİ - KALECİ -->
+<g class="animate-pulse" id="sprite-home-gk" style="animation-duration: 2.8s;" transform="translate(65, 270)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect fill="#111111" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#2BF853" id="gk-home-shirt" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#F2B889" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- EV SAHİBİ - OYUNCU 1 (HÜCUM FORVET) -->
+<g class="animate-bounce" style="animation-duration: 1.6s;" transform="translate(480, 240)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect class="home-shorts-fill" fill="#FDB913" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path class="home-shirt-fill" d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#DE0B1E" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#FCD5B5" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- EV SAHİBİ - OYUNCU 2 (KANAT) -->
+<g class="animate-bounce" style="animation-duration: 1.8s;" transform="translate(340, 110)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect class="home-shorts-fill" fill="#FDB913" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path class="home-shirt-fill" d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#DE0B1E" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#E8B896" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- EV SAHİBİ - OYUNCU 3 (ORTA SAHA PASÖR) -->
+<g class="animate-bounce" style="animation-duration: 1.7s;" transform="translate(260, 360)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="home-socks-fill" fill="#FFFFFF" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect class="home-shorts-fill" fill="#FDB913" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path class="home-shirt-fill" d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#DE0B1E" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#FCD5B5" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- DEPLASMAN - KALECİ -->
+<g class="animate-pulse" id="sprite-away-gk" style="animation-duration: 2.6s;" transform="translate(695, 270)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="away-socks-fill" fill="#00205B" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="away-socks-fill" fill="#00205B" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect fill="#111111" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#FF5E00" id="gk-away-shirt" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#FCD5B5" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- DEPLASMAN - STOPER 1 (KAYAN SAVUNMA) -->
+<g class="animate-bounce" style="animation-duration: 1.5s;" transform="translate(540, 275)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="away-socks-fill" fill="#00205B" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="away-socks-fill" fill="#00205B" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect class="away-shorts-fill" fill="#FFFFFF" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path class="away-shirt-fill" d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#00205B" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#C68642" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- DEPLASMAN - STOPER 2 (ALAN KAPATAN) -->
+<g class="animate-bounce" style="animation-duration: 1.9s;" transform="translate(560, 160)">
+<ellipse cx="20" cy="56" fill="rgba(0,0,0,0.4)" rx="15" ry="4"></ellipse>
+<rect class="away-socks-fill" fill="#00205B" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="12" y="40"></rect>
+<rect class="away-socks-fill" fill="#00205B" height="14" rx="2" stroke="#000" stroke-width="2.5" width="6" x="22" y="40"></rect>
+<rect class="away-shorts-fill" fill="#FFFFFF" height="14" rx="3" stroke="#000" stroke-width="3" width="20" x="10" y="28"></rect>
+<path class="away-shirt-fill" d="M 7 13 L 33 13 L 31 30 L 9 30 Z" fill="#00205B" stroke="#000" stroke-width="3.2"></path>
+<circle cx="20" cy="7" fill="#FCD5B5" r="9" stroke="#000" stroke-width="3"></circle>
+</g>
+<!-- FUTBOL TOPU -->
+<g class="animate-pulse" style="animation-duration: 0.9s;" transform="translate(515, 292)">
+<circle cx="6" cy="6" fill="#FFFFFF" r="6" stroke="#000" stroke-width="2.2"></circle>
+<polygon fill="#111111" points="6,3 8,5 7,7 5,7 4,5"></polygon>
+</g>
+<!-- PAS / ŞUT TRAJEKTORY ÇİZGİSİ -->
+<path d="M 300 375 Q 400 330 505 295" fill="none" opacity="0.85" stroke="#FFE000" stroke-dasharray="6,4" stroke-width="3"></path>
+</svg>
+<div class="absolute bottom-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px- space-md py-1 rounded-lg flex items-center gap-space-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm font-mono">2D Karikatür Fiziği: Aktif</span>
+</div>
+</div>
+<div class="mt-space-md grid grid-cols-2 gap-space-md">
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-center gap-space-md">
+<div class="w-9 h-9 rounded bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">aspect_ratio</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-sm">Tuval Oranı</span>
+<span class="font-label-sm text-label-sm text-outline">9:16 Dikey Shorts / Reels</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-center gap-space-md">
+<div class="w-9 h-9 rounded bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">person_off</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-sm">Sprite Yapısı</span>
+<span class="font-label-sm text-label-sm text-outline">Yüzsüz, 3px Konturlu</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-xl pt-space-md bg-surface-container-low px-space-lg py-space-md rounded-xl flex items-center justify-between shadow-xl">
+<a class="inline-flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-bright transition-all font-headline-sm text-headline-sm shadow-sm group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span>Geri: 2. Kes</span>
+</a>
+<div class="flex items-center gap-space-md">
+<span class="font-label-md text-label-md text-outline font-mono hidden sm:inline-block">Kit eşleşmesi tamamlandı</span>
+<a class="inline-flex items-center gap-space-xs px-space-xl py-2.5 rounded-lg bg-primary-container text-on-primary-container hover:bg-[#e0b312] transition-all font-headline-md text-headline-md font-bold shadow-md hover:shadow-lg group" href="#">
+<span>4. Adıma Geç: Stil &amp; Format</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  function updateTeamColors() {
+    const homeShirt = document.getElementById('home-shirt-color').value;
+    const homeShorts = document.getElementById('home-shorts-color').value;
+    const homeSocks = document.getElementById('home-socks-color').value;
+
+    const awayShirt = document.getElementById('away-shirt-color').value;
+    const awayShorts = document.getElementById('away-shorts-color').value;
+    const awaySocks = document.getElementById('away-socks-color').value;
+
+    document.getElementById('home-shirt-val').textContent = homeShirt.toUpperCase();
+    document.getElementById('home-shorts-val').textContent = homeShorts.toUpperCase();
+    document.getElementById('home-socks-val').textContent = homeSocks.toUpperCase();
+
+    document.getElementById('away-shirt-val').textContent = awayShirt.toUpperCase();
+    document.getElementById('away-shorts-val').textContent = awayShorts.toUpperCase();
+    document.getElementById('away-socks-val').textContent = awaySocks.toUpperCase();
+
+    document.querySelectorAll('.home-shirt-fill').forEach(el => el.setAttribute('fill', homeShirt));
+    document.querySelectorAll('.home-shorts-fill').forEach(el => el.setAttribute('fill', homeShorts));
+    document.querySelectorAll('.home-socks-fill').forEach(el => el.setAttribute('fill', homeSocks));
+
+    document.querySelectorAll('.away-shirt-fill').forEach(el => el.setAttribute('fill', awayShirt));
+    document.querySelectorAll('.away-shorts-fill').forEach(el => el.setAttribute('fill', awayShorts));
+    document.querySelectorAll('.away-socks-fill').forEach(el => el.setAttribute('fill', awaySocks));
+  }
+
+  function applyHomePreset(shirt, shorts, socks, label) {
+    document.getElementById('home-shirt-color').value = shirt;
+    document.getElementById('home-shorts-color').value = shorts;
+    document.getElementById('home-socks-color').value = socks;
+    document.getElementById('home-label-summary').textContent = label;
+    updateTeamColors();
+  }
+
+  function applyAwayPreset(shirt, shorts, socks, label) {
+    document.getElementById('away-shirt-color').value = shirt;
+    document.getElementById('away-shorts-color').value = shorts;
+    document.getElementById('away-socks-color').value = socks;
+    document.getElementById('away-label-summary').textContent = label;
+    updateTeamColors();
+  }
+
+  function updateGKStatus() {
+    const homeGkOn = document.getElementById('home-gk-toggle').checked;
+    const awayGkOn = document.getElementById('away-gk-toggle').checked;
+
+    const homeGk = document.getElementById('gk-home-shirt');
+    const awayGk = document.getElementById('gk-away-shirt');
+
+    if (homeGk) {
+      homeGk.setAttribute('fill', homeGkOn ? '#2BF853' : document.getElementById('home-shirt-color').value);
+    }
+    if (awayGk) {
+      awayGk.setAttribute('fill', awayGkOn ? '#FF5E00' : document.getElementById('away-shirt-color').value);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    updateTeamColors();
+    updateGKStatus();
+  });
+</script></main></div></body></html>
