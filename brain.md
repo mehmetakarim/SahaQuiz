@@ -3,10 +3,10 @@
 ---
 
 ## 1. Genel Durum
-- **Son Güncelleme:** 2026-10-08 00:05:00 (+03:00)
+- **Son Güncelleme:** 2026-10-08 00:08:00 (+03:00)
 - **Aktif Branch ve Referans Commit:** `main`
 - **Remote Origin:** `https://github.com/mehmetakarim/SahaQuiz.git`
-- **Çalışma Ağacı Durumu:** Render borusu ve çıktısı doğrulandı, git commit ve push için hazır.
+- **Çalışma Ağacı Durumu:** Tauri 2 ikonları ve Rust IPC modülü tamamlandı; Rust `cargo check` ve Vite derlemeleri sıfır hata ile doğrulandı.
 
 ---
 
@@ -18,6 +18,7 @@
   3. 1080x1920 30 FPS H.264 dikey sessiz video çıktısı (`test_output_cartoon.mp4`) üretildi.
   4. Orijinal sesin çıktıda yer almadığı ve videonun tamamen sessiz olduğu ffprobe ile kanıtlandı.
   5. 5 ekran akışı, renk değişimleri, in/out kesimi ve yakın plan heuristiği doğrulandı.
+  6. Tauri 2 Rust kabuğu (`src-tauri`) `cargo check` ile sıfır hatayla derlendi.
 - **Devam Eden İşler:** Yok (Kullanıcı gereksinimleri eksiksiz tamamlandı).
 - **Engeller ve Açık Sorunlar:** Yok.
 
@@ -25,15 +26,15 @@
 
 ## 3. Doğrulama Durumu
 - **Son Doğrulamalar ve Sonuçları:**
-  - `ffprobe test_output_cartoon.mp4`: `width: 1080`, `height: 1920`, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz).
+  - `cargo check --manifest-path src-tauri/Cargo.toml`: Finished dev profile in 32.45s (0 hata, tam uyum).
   - `npm run build`: 0 hata ile TypeScript ve Vite derlemesi başarılı.
-  - `cargo check`: Rust bağımlılıkları ve `src-tauri` yapılandırması doğrulandı.
+  - `ffprobe test_output_cartoon.mp4`: `width: 1080`, `height: 1920`, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz).
 - **Henüz Doğrulanmamış Noktalar:** Yok.
 
 ---
 
 ## 4. Sonraki Somut Adım
-- **İlk Yapılacak İşlem:** Yapılan son değişiklikleri commit edip GitHub reposuna pushlamak (`git push`).
+- **İlk Yapılacak İşlem:** Kullanıcının isteği doğrultusunda canlı test (`npm run tauri dev`) veya ek özellik geliştirmeleri gerçekleştirmek.
 - **İncelenecek Dosya:** [README.md](README.md)
 
 ---
