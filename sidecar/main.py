@@ -28,8 +28,23 @@ def send_json(data):
     sys.stdout.flush()
 
 
+def resolve_video_path(video_path):
+    """Göreceli yolları proje köküne göre mutlaklaştırır"""
+    if not video_path:
+        return video_path
+    if os.path.exists(video_path):
+        return os.path.abspath(video_path)
+    # Proje kökünü dene
+    project_root = os.path.dirname(SCRIPT_DIR)
+    cand = os.path.join(project_root, video_path)
+    if os.path.exists(cand):
+        return os.path.abspath(cand)
+    return video_path
+
+
 def probe_video(video_path):
     """Video hakkında ffmpeg/ffprobe kullanarak meta bilgileri çıkarır"""
+    video_path = resolve_video_path(video_path)
     if not os.path.exists(video_path):
         send_json({"type": "error", "message": f"Dosya bulunamadı: {video_path}"})
         return
@@ -103,6 +118,7 @@ def extract_preview_frames(video_path, in_sec=0.0, out_sec=10.0, sample_fps=2):
     """
     Belirtilen aralıktan saniyede sample_fps kadar kareyi base64 jpeg olarak döner.
     """
+    video_path = resolve_video_path(video_path)
     if not os.path.exists(video_path):
         send_json({"type": "error", "message": f"Dosya bulunamadı: {video_path}"})
         return
@@ -156,7 +172,10 @@ def render_pipeline(params):
     5. Pillow ile 1080x1920 dikey tuval çiz (kel kafa, kalın siyah kontur, düz forma, numara/sponsor yok)
     6. ffmpeg libx264 ile sessiz mp4 paketle
     """
-    video_path = params.get("path")
+    video_path = resolve_video_path(params.get("path"))
+    if not video_path or not os.path.exists(video_path):
+        send_json({"type": "error", "message": f"Render edilecek video dosyası bulunamadı: {params.get('path')}"})
+        return
     in_sec = float(params.get("in_sec", 0.0))
     out_sec = float(params.get("out_sec", 10.0))
     home_colors = params.get("home_colors", {"shirt": "#DE0B1E", "shorts": "#FDB913", "socks": "#FFFFFF"})

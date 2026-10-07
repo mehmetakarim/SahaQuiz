@@ -50,21 +50,47 @@ mod commands {
         payload: serde_json::Value,
     ) -> Result<serde_json::Value, String> {
         tokio::task::spawn_blocking(move || {
-            let python_bin = if std::path::Path::new(".venv/bin/python3").exists() {
-                ".venv/bin/python3"
-            } else if std::path::Path::new(".venv/Scripts/python.exe").exists() {
-                ".venv/Scripts/python.exe"
+            // Proje kök dizinini dinamik ve güvenilir şekilde belirle
+            let current_dir = std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
+            let project_root = if current_dir.join("sidecar/main.py").exists() {
+                current_dir
+            } else if current_dir.join("../sidecar/main.py").exists() {
+                current_dir.join("..").canonicalize().unwrap_or_else(|_| current_dir.join(".."))
             } else {
-                "python3"
+                current_dir
             };
 
-            let mut child = Command::new(python_bin)
-                .arg("sidecar/main.py")
+            // Python çalıştırıcı yolunu belirle
+            let venv_unix = project_root.join(".venv/bin/python3");
+            let venv_win = project_root.join(".venv/Scripts/python.exe");
+
+            let python_bin = if venv_unix.exists() {
+                venv_unix.to_string_lossy().to_string()
+            } else if venv_win.exists() {
+                venv_win.to_string_lossy().to_string()
+            } else {
+                "python3".to_string()
+            };
+
+            let script_path = project_root.join("sidecar/main.py");
+            if !script_path.exists() {
+                return Err(format!(
+                    "Sidecar scripti bulunamadı: {}. Çalışma dizini: {}",
+                    script_path.display(),
+                    project_root.display()
+                ));
+            }
+
+            let mut cmd = Command::new(&python_bin);
+            cmd.arg(&script_path)
+                .current_dir(&project_root)
                 .stdin(Stdio::piped())
                 .stdout(Stdio::piped())
-                .stderr(Stdio::piped())
+                .stderr(Stdio::piped());
+
+            let mut child = cmd
                 .spawn()
-                .map_err(|e| format!("Python sidecar başlatılamadı: {}", e))?;
+                .map_err(|e| format!("Python sidecar başlatılamadı ({}, {}): {}", python_bin, project_root.display(), e))?;
 
             let mut req = payload.clone();
             if let Some(obj) = req.as_object_mut() {
@@ -74,9 +100,23 @@ mod commands {
             let json_line = serde_json::to_string(&req)
                 .map_err(|e| format!("İstek JSON formatına dönüştürülemedi: {}", e))?;
 
+            // Stdin'e json yaz
             if let Some(mut stdin) = child.stdin.take() {
-                writeln!(stdin, "{}", json_line)
-                    .map_err(|e| format!("Sidecar stdin yazılamadı: {}", e))?;
+                if let Err(e) = writeln!(stdin, "{}", json_line) {
+                    // Yazılamadıysa stderr'i okuyup hatayı kullanıcıya açıklayalım
+                    let mut err_msg = String::new();
+                    if let Some(mut stderr) = child.stderr.take() {
+                        use std::io::Read;
+                        let _ = stderr.read_to_string(&mut err_msg);
+                    }
+                    return Err(format!(
+                        "Sidecar stdin yazılamadı: {} (Python Stderr: {})",
+                        e,
+                        err_msg.trim()
+                    ));
+                }
+                // flush ve drop
+                let _ = stdin.flush();
             }
 
             let stdout = child.stdout.take().ok_or("Stdout alınamadı")?;
@@ -110,8 +150,18 @@ mod commands {
             let status = child
                 .wait()
                 .map_err(|e| format!("Sidecar bekleme hatası: {}", e))?;
+
             if !status.success() && final_response.is_none() {
-                return Err("Sidecar başarısız çıkış yaptı".to_string());
+                let mut err_msg = String::new();
+                if let Some(mut stderr) = child.stderr.take() {
+                    use std::io::Read;
+                    let _ = stderr.read_to_string(&mut err_msg);
+                }
+                return Err(format!(
+                    "Sidecar başarısız çıkış yaptı (kod {:?}): {}",
+                    status.code(),
+                    err_msg.trim()
+                ));
             }
 
             final_response.ok_or_else(|| "Sidecar'dan geçerli yanıt alınamadı".to_string())

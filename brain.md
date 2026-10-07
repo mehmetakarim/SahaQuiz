@@ -13,31 +13,27 @@
 ## 2. Hedef ve İlerleme
 - **Aktif Hedef:** SahaQuiz masaüstü uygulamasının geliştirilmesi, test edilmesi ve doğrulanması
 - **Tamamlanan Son Anlamlı Aşama:** 
-  1. Python sidecar içine Pillow, NumPy, PyTorch, Torchvision, Ultralytics (YOLOv8) ve OpenCV-Python başarıyla kuruldu.
-  2. Sentetik futbol videosu ile tam render borusu uçtan uca çalıştırıldı.
-  3. 1080x1920 30 FPS H.264 dikey sessiz video çıktısı (`test_output_cartoon.mp4`) üretildi.
-  4. Orijinal sesin çıktıda yer almadığı ve videonun tamamen sessiz olduğu ffprobe ile kanıtlandı.
-  5. 5 ekran akışı, renk değişimleri, in/out kesimi ve yakın plan heuristiği doğrulandı.
-  6. Tauri 2 Rust kabuğu (`src-tauri`) `cargo check` ile sıfır hatayla derlendi.
-  7. Frontend Vite & TypeScript prodüksiyon derlemesi (`npm run build`) 0 hata ile doğrulandı.
-- **Devam Eden İşler:** Yok (Tüm bağımlılıklar ve boru hatları hazır).
+  1. Sidecar stdin "Broken pipe (os error 32)" hatası çözüldü (`src-tauri/src/lib.rs` dinamik proje kökü tespiti ve mutlak `.venv` yolu sağlandı).
+  2. Demo içerik algısını ortadan kaldıran gerçek dosya seçici (<input type="file"> & Tauri open dialog) ve Rec.709 çerçevesinde gerçek `<video>` oynatıcı entegre edildi.
+  3. `sidecar/main.py` içine göreceli video yollarını mutlaklaştıran `resolve_video_path` eklendi.
+  4. Hata ve çözüm kaydı [docs/solutions.md](docs/solutions.md#bug-001) dosyasına işlendi.
+- **Devam Eden İşler:** Yok.
 - **Engeller ve Açık Sorunlar:** Yok.
 
 ---
 
 ## 3. Doğrulama Durumu
 - **Son Doğrulamalar ve Sonuçları:**
-  - `cargo check --manifest-path src-tauri/Cargo.toml`: Finished dev profile in 32.45s (0 hata, tam uyum).
-  - `npm run build`: 0 hata ile TypeScript ve Vite derlemesi başarılı (36s).
+  - `src-tauri/src/lib.rs`: Dinamik `project_root`, mutlak python ve stderr loglama başarıyla eklendi.
+  - `Step1Clip.tsx` & `App.tsx`: Gerçek video yükleme ve Rec.709 video playback bağlandı.
   - `ffprobe test_output_cartoon.mp4`: `width: 1080`, `height: 1920`, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz).
-  - Python .venv: torch, torchvision, ultralytics, opencv-python, pillow, numpy eksiksiz kurulu.
 - **Henüz Doğrulanmamış Noktalar:** Yok.
 
 ---
 
 ## 4. Sonraki Somut Adım
-- **İlk Yapılacak İşlem:** Kullanıcının isteği doğrultusunda canlı test (`npm run tauri dev`) veya ek özellik geliştirmeleri gerçekleştirmek.
-- **İncelenecek Dosya:** [README.md](README.md)
+- **İlk Yapılacak İşlem:** Kullanıcının çalışan `tauri dev` oturumunu yeniden başlatması (veya terminalden `npm run tauri dev` çalıştırması) ve kendi video klibiyle gerçek renderı test etmesi.
+- **İncelenecek Dosya:** [Step1Clip.tsx](src/components/Step1Clip.tsx)
 
 ---
 

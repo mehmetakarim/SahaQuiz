@@ -88,11 +88,12 @@ export const App: React.FC = () => {
   }, []);
 
   // Dosya seçildiğinde metadata probe et
-  const handleSelectFile = async (filePath: string, fileName: string) => {
+  const handleSelectFile = async (filePath: string, fileName: string, fileUrl?: string) => {
     setState((prev) => ({
       ...prev,
       videoPath: filePath,
       videoName: fileName,
+      videoUrl: fileUrl || null,
     }));
 
     try {
@@ -202,6 +203,7 @@ export const App: React.FC = () => {
           {state.currentStep === 1 && (
             <Step1Clip
               videoPath={state.videoPath}
+              videoUrl={state.videoUrl}
               videoName={state.videoName}
               metadata={state.metadata}
               onSelectFile={handleSelectFile}
@@ -209,6 +211,7 @@ export const App: React.FC = () => {
                 setState((prev) => ({
                   ...prev,
                   videoPath: null,
+                  videoUrl: null,
                   videoName: "",
                   metadata: null,
                 }))

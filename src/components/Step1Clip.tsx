@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { VideoMetadata } from "../types";
 
 interface Step1ClipProps {
   videoPath: string | null;
+  videoUrl?: string | null;
   videoName: string;
   metadata: VideoMetadata | null;
-  onSelectFile: (filePath: string, fileName: string) => void;
+  onSelectFile: (filePath: string, fileName: string, fileUrl?: string) => void;
   onClearFile: () => void;
   onNextStep: () => void;
 }
 
 export const Step1Clip: React.FC<Step1ClipProps> = ({
   videoPath,
+  videoUrl,
   videoName,
   metadata,
   onSelectFile,
@@ -19,8 +21,9 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
   onNextStep,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Dosya seçici tetikleme (Tauri dialog veya web input)
+  // Dosya seçici tetikleme (Tauri dialog veya web HTML5 input)
   const handleBrowseFile = async () => {
     try {
       // @ts-ignore
@@ -37,7 +40,16 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
         });
         if (selected && typeof selected === "string") {
           const name = selected.split("/").pop() || selected.split("\\").pop() || "klip.mp4";
-          onSelectFile(selected, name);
+          // Tauri convertFileSrc ile video oynatıcı URL'i
+          let url = "";
+          try {
+            // @ts-ignore
+            const { convertFileSrc } = await import("@tauri-apps/api/core");
+            url = convertFileSrc(selected);
+          } catch {
+            url = "";
+          }
+          onSelectFile(selected, name, url);
           return;
         }
       }
@@ -45,8 +57,18 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
       // Tarayıcı/Vite fallback
     }
 
-    // Fallback: Test klibini veya standart klibi seç
-    onSelectFile("test_derbi_13s.mp4", "derbi_gol_ani_2024.mp4");
+    // HTML5 dosya inputunu tıkla
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleHtmlFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      onSelectFile(file.name, file.name, url);
+    }
   };
 
   const formatDuration = (seconds: number) => {
@@ -304,56 +326,67 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
               </div>
             </div>
 
-            {/* Simulated Match Frame Display */}
+            {/* Simulated Match Frame Display / Gerçek Video Oynatıcı */}
             <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center shadow-2xl group border border-outline-variant/30">
-              {/* Yeşil Saha Arka Planı */}
-              <div className="absolute inset-0 bg-[#1F7A3A] flex flex-col justify-between">
-                <div className="w-full h-full relative opacity-90">
-                  {/* Saha Çizgileri */}
-                  <div className="absolute inset-4 border-2 border-white/60 rounded"></div>
-                  <div className="absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-0.5 bg-white/60"></div>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full border-2 border-white/60 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-white"></div>
+              {videoUrl ? (
+                <video
+                  src={videoUrl}
+                  controls
+                  playsInline
+                  className="w-full h-full object-contain bg-surface-container-lowest"
+                />
+              ) : (
+                <>
+                  {/* Yeşil Saha Arka Planı (Demo / Bekleme) */}
+                  <div className="absolute inset-0 bg-[#1F7A3A] flex flex-col justify-between">
+                    <div className="w-full h-full relative opacity-90">
+                      {/* Saha Çizgileri */}
+                      <div className="absolute inset-4 border-2 border-white/60 rounded"></div>
+                      <div className="absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-0.5 bg-white/60"></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 rounded-full border-2 border-white/60 flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-white"></div>
+                      </div>
+                      {/* Ceza Sahaları */}
+                      <div className="absolute top-1/4 bottom-1/4 left-4 w-28 border-r-2 border-t-2 border-b-2 border-white/60"></div>
+                      <div className="absolute top-1/4 bottom-1/4 right-4 w-28 border-l-2 border-t-2 border-b-2 border-white/60"></div>
+                    </div>
                   </div>
-                  {/* Ceza Sahaları */}
-                  <div className="absolute top-1/4 bottom-1/4 left-4 w-28 border-r-2 border-t-2 border-b-2 border-white/60"></div>
-                  <div className="absolute top-1/4 bottom-1/4 right-4 w-28 border-l-2 border-t-2 border-b-2 border-white/60"></div>
-                </div>
-              </div>
 
-              {/* Broadcast Canlı Banner */}
-              <div className="absolute top-4 left-4 flex items-center gap-space-xs bg-surface-container-lowest/80 backdrop-blur-sm px-2.5 py-1 rounded-lg">
-                <span className="w-2 h-2 rounded-full bg-error animate-pulse"></span>
-                <span className="font-headline-sm text-headline-sm text-on-surface text-xs tracking-wider">
-                  CANLI DERBİ
-                </span>
-                <span className="text-outline-variant font-mono text-xs">| 74:18</span>
-              </div>
-              <div className="absolute top-4 right-4 flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur-sm px-2 py-1 rounded-lg font-label-sm text-label-sm text-on-surface">
-                <span className="material-symbols-outlined text-[13px] text-primary-container">crop</span>
-                <span className="font-mono">1080p50</span>
-              </div>
+                  {/* Broadcast Canlı Banner */}
+                  <div className="absolute top-4 left-4 flex items-center gap-space-xs bg-surface-container-lowest/80 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                    <span className="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                    <span className="font-headline-sm text-headline-sm text-on-surface text-xs tracking-wider">
+                      CANLI DERBİ
+                    </span>
+                    <span className="text-outline-variant font-mono text-xs">| 74:18</span>
+                  </div>
+                  <div className="absolute top-4 right-4 flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur-sm px-2 py-1 rounded-lg font-label-sm text-label-sm text-on-surface">
+                    <span className="material-symbols-outlined text-[13px] text-primary-container">crop</span>
+                    <span className="font-mono">1080p50</span>
+                  </div>
 
-              {/* Bounding Box Simülasyonu */}
-              <div className="absolute top-1/3 left-1/3 w-16 h-28 border-2 border-primary-container rounded bg-primary-container/10 flex flex-col justify-between p-1">
-                <span className="font-label-sm text-[9px] bg-primary-container text-on-primary-container px-1 py-0.5 rounded leading-none w-max font-mono font-bold">
-                  OYUNCU_09
-                </span>
-                <span className="font-label-sm text-[8px] text-primary-container font-mono">
-                  X:624 Y:380
-                </span>
-              </div>
-              <div className="absolute top-[38%] left-[54%] w-14 h-24 border-2 border-secondary rounded bg-secondary/10 flex flex-col justify-between p-1">
-                <span className="font-label-sm text-[9px] bg-secondary text-on-secondary px-1 py-0.5 rounded leading-none w-max font-mono font-bold">
-                  KALECI_01
-                </span>
-                <span className="font-label-sm text-[8px] text-secondary font-mono">
-                  X:998 Y:410
-                </span>
-              </div>
-              <div className="absolute top-[54%] left-[46%] w-7 h-7 rounded-full border border-primary-fixed-dim bg-primary-container/30 flex items-center justify-center animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-primary-container"></span>
-              </div>
+                  {/* Bounding Box Simülasyonu */}
+                  <div className="absolute top-1/3 left-1/3 w-16 h-28 border-2 border-primary-container rounded bg-primary-container/10 flex flex-col justify-between p-1">
+                    <span className="font-label-sm text-[9px] bg-primary-container text-on-primary-container px-1 py-0.5 rounded leading-none w-max font-mono font-bold">
+                      OYUNCU_09
+                    </span>
+                    <span className="font-label-sm text-[8px] text-primary-container font-mono">
+                      X:624 Y:380
+                    </span>
+                  </div>
+                  <div className="absolute top-[38%] left-[54%] w-14 h-24 border-2 border-secondary rounded bg-secondary/10 flex flex-col justify-between p-1">
+                    <span className="font-label-sm text-[9px] bg-secondary text-on-secondary px-1 py-0.5 rounded leading-none w-max font-mono font-bold">
+                      KALECI_01
+                    </span>
+                    <span className="font-label-sm text-[8px] text-secondary font-mono">
+                      X:998 Y:410
+                    </span>
+                  </div>
+                  <div className="absolute top-[54%] left-[46%] w-7 h-7 rounded-full border border-primary-fixed-dim bg-primary-container/30 flex items-center justify-center animate-pulse">
+                    <span className="w-2 h-2 rounded-full bg-primary-container"></span>
+                  </div>
+                </>
+              )}
 
               {/* Alt HUD Scrub Bar */}
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/70 to-transparent p-space-sm flex items-center justify-between gap-space-md">
@@ -475,6 +508,15 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Gizli Dosya Seçici Input */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleHtmlFileInput}
+        accept="video/mp4,video/quicktime,video/x-m4v"
+        className="hidden"
+      />
     </div>
   );
 };

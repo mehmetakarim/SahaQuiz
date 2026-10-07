@@ -29,6 +29,7 @@ export type Difficulty = "Kolay" | "Orta" | "Zor";
 export interface ProjectState {
   currentStep: Step;
   videoPath: string | null;
+  videoUrl?: string | null;
   videoName: string;
   metadata: VideoMetadata | null;
   inSec: number;
