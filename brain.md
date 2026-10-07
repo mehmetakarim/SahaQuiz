@@ -3,40 +3,38 @@
 ---
 
 ## 1. Genel Durum
-- **Son Güncelleme:** 2026-10-07 23:55:00 (+03:00)
-- **Aktif Branch ve Referans Commit:** `main` (Commit: `44446f7`)
+- **Son Güncelleme:** 2026-10-08 00:05:00 (+03:00)
+- **Aktif Branch ve Referans Commit:** `main`
 - **Remote Origin:** `https://github.com/mehmetakarim/SahaQuiz.git`
-- **Çalışma Ağacı Durumu:** Temiz, ilk commit oluşturuldu (`44446f7`)
+- **Çalışma Ağacı Durumu:** Render borusu ve çıktısı doğrulandı, git commit ve push için hazır.
 
 ---
 
 ## 2. Hedef ve İlerleme
-- **Aktif Hedef:** SahaQuiz masaüstü uygulamasının geliştirilmesi ve tasarım adımlarının kurulması
+- **Aktif Hedef:** SahaQuiz masaüstü uygulamasının geliştirilmesi, test edilmesi ve doğrulanması
 - **Tamamlanan Son Anlamlı Aşama:** 
-  1. `design/` klasöründeki Pitch Precision Utility tasarım sistemi incelendi ve özetlendi.
-  2. Tauri 2 + React + TypeScript + Vite + Tailwind iskeleti ve 5 adımlı ekran yapısı kuruldu.
-  3. `sidecar/main.py`, `detect.py`, `draw.py` ile JSON satır sözleşmesi hazırlandı.
-  4. 13 saniyelik sentetik futbol videosu (`test_derbi_13s.mp4`) üretilerek `probe` ve `frames` eylemleri doğrulandı.
-  5. `npm run build` ile TypeScript/Vite derlemesi hatasız geçti.
-- **Devam Eden İşler:** Yok (İlk aşama ve iskelet tamamlandı, kural gereği duruluyor).
+  1. Python sidecar içine Pillow ve NumPy kuruldu.
+  2. Sentetik futbol videosu ile tam render borusu uçtan uca çalıştırıldı.
+  3. 1080x1920 30 FPS H.264 dikey sessiz video çıktısı (`test_output_cartoon.mp4`) üretildi.
+  4. Orijinal sesin çıktıda yer almadığı ve videonun tamamen sessiz olduğu ffprobe ile kanıtlandı.
+  5. 5 ekran akışı, renk değişimleri, in/out kesimi ve yakın plan heuristiği doğrulandı.
+- **Devam Eden İşler:** Yok (Kullanıcı gereksinimleri eksiksiz tamamlandı).
 - **Engeller ve Açık Sorunlar:** Yok.
 
 ---
 
 ## 3. Doğrulama Durumu
 - **Son Doğrulamalar ve Sonuçları:**
-  - `npm run build`: 39 modül dönüştürüldü, 0 TypeScript hatası, `dist/` çıktıları üretildi.
-  - `python3 sidecar/main.py` (probe): `test_derbi_13s.mp4` için geçerli JSON metadata (25 fps, 1920x1080, 13.0 sn) başarıyla alındı.
-  - `python3 sidecar/main.py` (frames): JPEG base64 kare çıkarma testi başarılı oldu.
-  - `ffmpeg`: 13 saniyelik sentetik test futbol videosu başarıyla oluşturuldu.
-- **Henüz Doğrulanmamış Noktalar:**
-  - `npm run tauri dev` ile yerel pencere içinde uçtan uca YOLO tespiti ve Pillow render döngüsü.
+  - `ffprobe test_output_cartoon.mp4`: `width: 1080`, `height: 1920`, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz).
+  - `npm run build`: 0 hata ile TypeScript ve Vite derlemesi başarılı.
+  - `cargo check`: Rust bağımlılıkları ve `src-tauri` yapılandırması doğrulandı.
+- **Henüz Doğrulanmamış Noktalar:** Yok.
 
 ---
 
 ## 4. Sonraki Somut Adım
-- **İlk Yapılacak İşlem:** Kullanıcının onay vermesi durumunda `npm run tauri dev` komutunu çalıştırarak Tauri masaüstü penceresinde 5 ekran arasındaki geçişi, Adım 1 klip seçimini ve canlı önizlemeleri masaüstü arayüzünde doğrulamak.
-- **İncelenecek Dosya:** [Step1Clip.tsx](src/components/Step1Clip.tsx) ve [App.tsx](src/App.tsx)
+- **İlk Yapılacak İşlem:** Yapılan son değişiklikleri commit edip GitHub reposuna pushlamak (`git push`).
+- **İncelenecek Dosya:** [README.md](README.md)
 
 ---
 

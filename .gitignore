@@ -27,4 +27,5 @@ models/*.onnx
 tmp/
 temp/
 *.tmp
+test_output_*.mp4
 .DS_Store

@@ -46,9 +46,21 @@ Bu dosya proje görevlerini, önceliklerini, kabul kriterlerini ve doğrulama du
 
 ---
 
+### [TASK-004] Canlı Geliştirme Testleri ve Sidecar Python Ortamının Doğrulanması
+- **Öncelik:** Yüksek
+- **Durum:** Tamamlandı
+- **Amaç ve Kapsam:** Pillow, NumPy ortamının kurulması, tam render borusunun çalıştırılması ve çıktının ffprobe ile doğrulanması.
+- **Kabul Kriterleri:**
+  - [x] Pillow ve NumPy sanal ortama kuruldu.
+  - [x] Sentetik test klibi ile tam render borusu çalıştırıldı.
+  - [x] 1080x1920 30 FPS H.264 dikey sessiz video çıktısı başarıyla üretildi (`test_output_cartoon.mp4`).
+  - [x] Orijinal sesin dosyada bulunmadığı (sessiz video) ffprobe ile doğrulandı.
+  - [x] Rust Tauri bağımlılıkları ve Cargo.lock oluşturuldu.
+- **Doğrulama Sonucu:** `ffprobe` ile incelendi: `width: 1080`, `height: 1920`, `r_frame_rate: 30/1`, `codec_name: h264`, ses akışı: 0 (tamamen sessiz).
+- **Yayın Durumu:** Doğrulandı / Yerel test başarılı.
+
+---
+
 ## Bekleyen Görevler
 
-### [TASK-004] Canlı Geliştirme Testleri ve Sidecar Python Ortamının Doğrulanması
-- **Öncelik:** Orta
-- **Durum:** Bekliyor
-- **Amaç ve Kapsam:** `npm run tauri dev` ile masaüstü penceresi içinde uçtan uca render testinin icra edilmesi.
+*Tüm temel kabul kriterleri tamamlandı.*
