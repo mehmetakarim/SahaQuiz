@@ -3,10 +3,10 @@
 ---
 
 ## 1. Genel Durum
-- **Son Güncelleme:** 2026-10-08 09:48:00 (+03:00)
-- **Aktif Branch ve Referans Commit:** `main`
-- **Remote Origin:** `https://github.com/mehmetakarim/SahaQuiz.git`
-- **Çalışma Ağacı Durumu:** Gerçek veri akışı tamamlandı; sahte fallback'ler temizlendi; filmstrip ve yakın plan heuristiği sidecar'a bağlandı; Step 5 dikey video oynatıcısı entegre edildi.
+- **Son Güncelleme:** 2026-10-08 16:17:00 (+03:00)
+- **Aktif Branch ve Referans Commit:** `main` (`7b65d52`)
+- **Remote Origin:** `https://github.com/mehmetakarim/SahaQuiz.git` (senkronize, pushlandı)
+- **Çalışma Ağacı Durumu:** Temiz (working tree clean). Gerçek video analizi, filmstrip kareleri, dinamik yakın plan rozeti ve Step 5 dikey video oynatıcısı repoya aktarıldı.
 - **Doğrulama Durumu:** `npm run build` (tsc & vite build) 0 hata (10.04s) ve sidecar probe/frames/render borusu doğrulandı.
 
 ---
