@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ProjectState } from "../types";
 
 interface Step5ExportProps {
@@ -21,6 +21,29 @@ export const Step5Export: React.FC<Step5ExportProps> = ({
     outSec,
     metadata,
   } = state;
+
+  const [outputVideoUrl, setOutputVideoUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (outputPath) {
+      const resolveUrl = async () => {
+        try {
+          // @ts-ignore
+          if (window.__TAURI_INTERNALS__) {
+            const { convertFileSrc } = await import("@tauri-apps/api/core");
+            setOutputVideoUrl(convertFileSrc(outputPath));
+          } else {
+            setOutputVideoUrl(outputPath);
+          }
+        } catch {
+          setOutputVideoUrl(outputPath);
+        }
+      };
+      resolveUrl();
+    } else {
+      setOutputVideoUrl(null);
+    }
+  }, [outputPath]);
 
   const totalFrames = metadata?.frame_count || Math.floor((outSec - inSec) * 25);
   const percent = renderProgress ? renderProgress.percent : outputPath ? 100 : 0;
@@ -296,6 +319,46 @@ export const Step5Export: React.FC<Step5ExportProps> = ({
                 </div>
               </div>
             </div>
+
+            {/* Render Tamamlandı - Canlı 9:16 Dikey Önizleme Oynatıcısı */}
+            {isDone && (
+              <div className="mt-5 bg-surface-container rounded-xl p-space-md border border-secondary/40 shadow-xl flex flex-col items-center">
+                <div className="w-full flex items-center justify-between pb-3 mb-3 border-b border-outline-variant/20">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-secondary text-[22px]">check_circle</span>
+                    <div>
+                      <span className="font-headline-sm text-headline-sm text-on-surface block">
+                        Üretilen Sessiz 2D Video (1080×1920)
+                      </span>
+                      <span className="font-label-sm text-label-sm text-on-surface-variant font-mono">
+                        {outputPath}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-secondary font-label-sm text-label-sm font-mono bg-secondary-container/40 px-2.5 py-1 rounded-full border border-secondary/30">
+                    H.264 • 30 FPS • Sessiz MP4
+                  </span>
+                </div>
+
+                <div className="relative aspect-[9/16] h-[400px] rounded-xl overflow-hidden bg-black shadow-2xl border border-outline-variant/30 flex items-center justify-center">
+                  {outputVideoUrl ? (
+                    <video
+                      src={outputVideoUrl}
+                      controls
+                      autoPlay
+                      loop
+                      playsInline
+                      className="w-full h-full object-contain bg-black"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center gap-2 text-outline">
+                      <span className="material-symbols-outlined text-[28px] animate-spin">progress_activity</span>
+                      <span className="font-label-sm text-label-sm">Video yükleniyor...</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Akıllı İyileştirme ve Kurtarma Kartı */}

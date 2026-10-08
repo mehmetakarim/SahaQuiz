@@ -138,7 +138,15 @@ export const Step1Clip: React.FC<Step1ClipProps> = ({
             onDrop={(e) => {
               e.preventDefault();
               setIsDragging(false);
-              handleBrowseFile();
+              const file = e.dataTransfer.files?.[0];
+              if (file) {
+                const url = URL.createObjectURL(file);
+                // @ts-ignore
+                const realPath = file.path || file.name;
+                onSelectFile(realPath, file.name, url);
+              } else {
+                handleBrowseFile();
+              }
             }}
             onClick={handleBrowseFile}
             className={`relative group rounded-xl p-space-lg flex flex-col items-center justify-center text-center transition-all cursor-pointer overflow-hidden min-h-[220px] ${

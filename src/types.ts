@@ -14,6 +14,8 @@ export interface PreviewFrame {
   time_sec: number;
   frame_index: number;
   data_uri: string;
+  has_close_up?: boolean;
+  players?: any[];
 }
 
 export interface TeamKit {
@@ -35,6 +37,9 @@ export interface ProjectState {
   inSec: number;
   outSec: number;
   currentPreviewSec: number;
+  previewFrames: PreviewFrame[];
+  hasCloseUpDetected: boolean;
+  isLoadingFrames: boolean;
   homeKit: TeamKit;
   awayKit: TeamKit;
   isHomeGkCustom: boolean;

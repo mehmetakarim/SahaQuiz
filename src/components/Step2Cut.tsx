@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { VideoMetadata } from "../types";
+import { VideoMetadata, PreviewFrame } from "../types";
 
 interface Step2CutProps {
   videoName: string;
@@ -8,6 +8,10 @@ interface Step2CutProps {
   inSec: number;
   outSec: number;
   currentPreviewSec: number;
+  previewFrames?: PreviewFrame[];
+  hasCloseUpDetected?: boolean;
+  isLoadingFrames?: boolean;
+  onRefreshFrames?: () => void;
   onChangeInSec: (val: number) => void;
   onChangeOutSec: (val: number) => void;
   onChangePreviewSec: (val: number) => void;
@@ -22,6 +26,10 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
   inSec,
   outSec,
   currentPreviewSec,
+  previewFrames = [],
+  hasCloseUpDetected = false,
+  isLoadingFrames = false,
+  onRefreshFrames,
   onChangeInSec,
   onChangeOutSec,
   onChangePreviewSec,
@@ -66,8 +74,16 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
     }
   };
 
-  // Yakın plan heuristiği (kullanıcı talimatı: oyuncu kutusu > %35 ise rozet göster)
-  const hasCloseUpDetected = true; // Heuristik demo/aktif
+  // Yakın plan heuristiği (kullanıcı kuralı: oyuncu kutusu > %35 ise rozet göster)
+  // Mevcut önizleme saniyesine en yakın karedeki analiz veya aralıktaki genel durum
+  const activePreviewFrame = previewFrames.length > 0
+    ? previewFrames.reduce((prev, curr) =>
+        Math.abs(curr.time_sec - currentPreviewSec) < Math.abs(prev.time_sec - currentPreviewSec) ? curr : prev
+      )
+    : null;
+
+  const currentFrameHasCloseUp = activePreviewFrame?.has_close_up ?? false;
+  const showCloseUpBadge = currentFrameHasCloseUp || hasCloseUpDetected;
 
   const formatTimecode = (sec: number) => {
     const m = Math.floor(sec / 60);
@@ -230,9 +246,9 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
           </span>
         </div>
 
-        {/* Yakın Plan Tespit Rozeti (Heuristik kuralı) */}
-        {hasCloseUpDetected && (
-          <div className="absolute top-4 right-4 z-20 max-w-sm rounded-lg bg-surface-container-lowest/95 p-3 shadow-xl backdrop-blur-md border border-outline-variant/30">
+        {/* Yakın Plan Tespit Rozeti (Heuristik: oyuncu kutusu > %35 ise) */}
+        {showCloseUpBadge && (
+          <div className="absolute top-4 right-4 z-20 max-w-sm rounded-lg bg-surface-container-lowest/95 p-3 shadow-xl backdrop-blur-md border border-outline-variant/30 animate-fade-in">
             <div className="flex items-start gap-space-sm">
               <div className="w-7 h-7 rounded bg-primary-container flex items-center justify-center shrink-0">
                 <span className="material-symbols-outlined text-on-primary-container text-[18px]">
@@ -244,17 +260,18 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
                   <span className="font-headline-sm text-headline-sm text-primary-container">
                     Yakın Plan Tespit Edildi
                   </span>
-                  <span className="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-primary font-semibold">
+                  <span className="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-primary font-semibold font-mono">
                     {formatTimecode(currentPreviewSec)}
                   </span>
                 </div>
                 <p className="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">
+                  Oyuncu kutusu kare yüksekliğinin <strong className="text-on-surface">%35'inden büyük</strong>.
                   Yüz ve forma numarası <strong className="text-on-surface">3. Takımlar / 2D Sprite</strong>{" "}
                   aşamasında anonim karaktere otomatik dönüştürülecektir.
                 </p>
                 <div className="mt-2 flex items-center gap-space-sm font-label-sm text-label-sm text-secondary">
                   <span className="material-symbols-outlined text-[14px]">auto_fix_high</span>
-                  <span>Sprite maskeleme motoru devrede</span>
+                  <span>Sprite anonimleştirme motoru devrede</span>
                 </div>
               </div>
             </div>
@@ -372,24 +389,66 @@ export const Step2Cut: React.FC<Step2CutProps> = ({
               <span>Out Belirle</span>
               <span className="font-bold text-primary-container">O</span>
             </button>
+            {onRefreshFrames && (
+              <button
+                type="button"
+                onClick={onRefreshFrames}
+                disabled={isLoadingFrames}
+                className="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-sm text-label-sm transition-colors border border-outline-variant/30"
+                title="Kesilen aralığı sidecar ile yeniden analiz et"
+              >
+                <span className={`material-symbols-outlined text-[14px] ${isLoadingFrames ? "animate-spin" : ""}`}>
+                  sync
+                </span>
+                <span>{isLoadingFrames ? "Analiz Ediliyor..." : "Kareleri Analiz Et"}</span>
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Filmstrip Timeline Scrubber */}
+        {/* Filmstrip Timeline Scrubber (Gerçek Çıkarılan Kareler) */}
         <div className="relative w-full h-20 bg-surface-container-lowest rounded-lg overflow-hidden border border-outline-variant/30 flex items-center">
-          {/* Kare Şeritleri Simülasyonu */}
+          {/* Gerçek Video Kareleri veya Şablon */}
           <div className="w-full h-full flex">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 h-full border-r border-white/5 bg-[#1F7A3A]/40 flex flex-col justify-between p-1 opacity-70"
-              >
-                <span className="text-[9px] font-mono text-outline">
-                  {(i * (duration / 12)).toFixed(1)}s
-                </span>
-                <div className="w-4 h-6 rounded-sm bg-white/20 self-center"></div>
-              </div>
-            ))}
+            {previewFrames && previewFrames.length > 0 ? (
+              previewFrames.map((frame, i) => (
+                <div
+                  key={i}
+                  onClick={() => onChangePreviewSec(frame.time_sec)}
+                  className="relative flex-1 h-full cursor-pointer hover:opacity-100 transition-opacity border-r border-black/40 overflow-hidden group select-none"
+                  title={`${frame.time_sec}s (${frame.has_close_up ? "Yakın Plan: %35+ Oyuncu Kutusu" : "Geniş Açı"})`}
+                >
+                  <img
+                    src={frame.data_uri}
+                    alt={`frame ${i}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                  <div className="absolute bottom-0 inset-x-0 bg-black/70 px-1 py-0.5 flex items-center justify-between pointer-events-none">
+                    <span className="text-[9px] font-mono text-white/90">
+                      {frame.time_sec.toFixed(1)}s
+                    </span>
+                    {frame.has_close_up && (
+                      <span
+                        className="w-2 h-2 rounded-full bg-primary-container shadow"
+                        title="Yakın Plan"
+                      ></span>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
+              Array.from({ length: 12 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="flex-1 h-full border-r border-white/5 bg-[#1F7A3A]/40 flex flex-col justify-between p-1 opacity-70"
+                >
+                  <span className="text-[9px] font-mono text-outline">
+                    {(i * (duration / 12)).toFixed(1)}s
+                  </span>
+                  <div className="w-4 h-6 rounded-sm bg-white/20 self-center"></div>
+                </div>
+              ))
+            )}
           </div>
 
           {/* In / Out Seçim Alanı Vurgusu */}

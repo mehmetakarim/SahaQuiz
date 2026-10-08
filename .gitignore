@@ -28,4 +28,5 @@ tmp/
 temp/
 *.tmp
 test_output_*.mp4
+test_user_rendered.mp4
 .DS_Store

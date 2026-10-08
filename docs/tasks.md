@@ -67,8 +67,22 @@ Bu dosya proje görevlerini, önceliklerini, kabul kriterlerini ve doğrulama du
 - **Doğrulama Sonucu:** `npm run build` (tsc & vite build) başarıyla 0 hata ile sonuçlandı; PyTorch/Ultralytics başarıyla yüklendi.
 - **Yayın Durumu:** Doğrulandı / Yerel test başarılı.
 
+### [TASK-006] Gerçek Veri Entegrasyonu, Dinamik Yakın Plan Heuristiği ve Çıktı Oynatıcısı
+- **Öncelik:** Yüksek
+- **Durum:** Tamamlandı
+- **Amaç ve Kapsam:** Sahte veya sentetik fallback'lerin kaldırılması, filmstrip şeridine gerçek video karelerinin ve YOLOv8n yakın plan heuristiğinin bağlanması, Step 5'e render bitimi dikey oynatıcı eklenmesi.
+- **Kabul Kriterleri:**
+  - [x] `sidecar/main.py` probe fallback sahteliği kaldırıldı; OpenCV ile gerçek meta okuma eklendi.
+  - [x] `sidecar/main.py` `extract_preview_frames` içine YOLOv8n tespiti ve `%35` oyuncu kutusu heuristiği bağlandı.
+  - [x] `Step2Cut.tsx` filmstrip şeridine gerçek base64 jpeg kareleri ve tıklanabilir zaman kodları yerleştirildi.
+  - [x] Sabit `hasCloseUpDetected = true` rozeti dinamik hale getirildi; gerçek ölçümle tetikleniyor.
+  - [x] `Step1Clip.tsx` başlangıçtaki sabit sahte klip durumu temizlendi; sürükle-bırak doğrudan dosya okuma düzeltildi.
+  - [x] `Step5Export.tsx` ekranına render bittiğinde otomatik oynayan 1080x1920 9:16 sessiz dikey MP4 oynatıcı eklendi.
+- **Doğrulama Sonucu:** `npm run build` 0 hata ile derlendi (10s); sidecar probe ve frames komutları canlı test edildi.
+- **Yayın Durumu:** Doğrulandı / Hazır.
+
 ---
 
 ## Bekleyen Görevler
 
-*Tüm temel kabul kriterleri tamamlandı.*
+*Tüm temel kabul kriterleri ve düzeltmeler tamamlandı.*

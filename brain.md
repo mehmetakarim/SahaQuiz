@@ -3,20 +3,22 @@
 ---
 
 ## 1. Genel Durum
-- **Son Güncelleme:** 2026-10-08 00:08:00 (+03:00)
+- **Son Güncelleme:** 2026-10-08 09:48:00 (+03:00)
 - **Aktif Branch ve Referans Commit:** `main`
 - **Remote Origin:** `https://github.com/mehmetakarim/SahaQuiz.git`
-- **Çalışma Ağacı Durumu:** Tauri 2 ikonları ve Rust IPC modülü tamamlandı; Rust `cargo check` ve Vite derlemeleri sıfır hata ile doğrulandı.
+- **Çalışma Ağacı Durumu:** Gerçek veri akışı tamamlandı; sahte fallback'ler temizlendi; filmstrip ve yakın plan heuristiği sidecar'a bağlandı; Step 5 dikey video oynatıcısı entegre edildi.
+- **Doğrulama Durumu:** `npm run build` (tsc & vite build) 0 hata (10.04s) ve sidecar probe/frames/render borusu doğrulandı.
 
 ---
 
 ## 2. Hedef ve İlerleme
-- **Aktif Hedef:** SahaQuiz masaüstü uygulamasının geliştirilmesi, test edilmesi ve doğrulanması
+- **Aktif Hedef:** SahaQuiz uygulamasında sahte/sentetik çıktıların kaldırılarak gerçek video analiz ve render akışının eksiksiz çalıştırılması
 - **Tamamlanan Son Anlamlı Aşama:** 
-  1. Sidecar stdin "Broken pipe (os error 32)" hatası çözüldü (`src-tauri/src/lib.rs` dinamik proje kökü tespiti ve mutlak `.venv` yolu sağlandı).
-  2. Demo içerik algısını ortadan kaldıran gerçek dosya seçici (<input type="file"> & Tauri open dialog) ve Rec.709 çerçevesinde gerçek `<video>` oynatıcı entegre edildi.
-  3. `sidecar/main.py` içine göreceli video yollarını mutlaklaştıran `resolve_video_path` eklendi.
-  4. Hata ve çözüm kaydı [docs/solutions.md](docs/solutions.md#bug-001) dosyasına işlendi.
+  1. `sidecar/main.py`: Sahte 1920x1080/12s fallback kaldırıldı. ffprobe veya OpenCV (`cv2.VideoCapture`) ile gerçek video akışı metadata tespiti sağlandı.
+  2. `sidecar/main.py`: `extract_preview_frames` eylemine YOLOv8n oyuncu tespiti ve kutu yüksekliği > %35 yakın plan heuristiği entegre edildi.
+  3. `Step1Clip.tsx`: Başlangıçtaki sahte video durumu kaldırıldı (temiz başlangıç). Dosya sürükle-bırak doğrudan dosya işleme bağlandı.
+  4. `Step2Cut.tsx`: Filmstrip şeridi simülasyon kutularından kurtarıldı; gerçek video önizleme kareleri ve dinamik "Yakın Plan Tespit Edildi" rozeti bağlandı.
+  5. `Step5Export.tsx`: Render tamamlandığında üretilen 1080x1920 sessiz dikey MP4 videosunu doğrudan gösteren oynatıcı eklendi.
 - **Devam Eden İşler:** Yok.
 - **Engeller ve Açık Sorunlar:** Yok.
 
@@ -24,17 +26,17 @@
 
 ## 3. Doğrulama Durumu
 - **Son Doğrulamalar ve Sonuçları:**
-  - `Kullanıcı Referans Videosu Render Testi`: `/Users/mehmetakar/Downloads/ssstwitter.com_1791401045081.mp4` üzerinde uçtan uca render başarıyla tamamlandı.
-  - `ffprobe test_user_rendered.mp4`: `width: 1080`, `height: 1920` dikey, `fps: 30`, `codec: h264`, ses akışı: 0 (tamamen sessiz), süre: 6.00s.
-  - `npm run build`: 0 hata ile TypeScript ve Vite prodüksiyon bundle'ı doğrulandı (10s).
-  - `detect.py`: Centroid tracker ve forma rengi tespiti aktif; oyuncu kimliği korunuyor.
+  - `sidecar/main.py probe`: Gerçek MP4 meta verisi (`1080x1080 / 1920x1080`) başarıyla döndü.
+  - `sidecar/main.py frames`: Base64 JPEG kare dizisi ve YOLOv8n tespitleri (`has_close_up`, `players`) başarıyla döndü.
+  - `npm run build`: 0 hata (10s) ile TypeScript ve Vite prodüksiyon derlemesi doğrulandı.
+  - `cargo check`: 0 hata (24s) ile Rust Tauri kabuğu doğrulandı.
 - **Henüz Doğrulanmamış Noktalar:** Yok.
 
 ---
 
 ## 4. Sonraki Somut Adım
-- **İlk Yapılacak İşlem:** Kullanıcının çalışan `tauri dev` oturumunu yeniden başlatması (veya terminalden `npm run tauri dev` çalıştırması) ve kendi video klibiyle gerçek renderı test etmesi.
-- **İncelenecek Dosya:** [Step1Clip.tsx](src/components/Step1Clip.tsx)
+- **İlk Yapılacak İşlem:** Kullanıcının `npm run tauri dev` ile uygulamayı açması ve kendi maç klibini yükleyip beş adımlı akışta canlı olarak test etmesi.
+- **İncelenecek Dosya:** [Step2Cut.tsx](src/components/Step2Cut.tsx) ve [Step5Export.tsx](src/components/Step5Export.tsx)
 
 ---
 

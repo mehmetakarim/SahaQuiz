@@ -11,20 +11,16 @@ import { ProjectState, Step, VideoMetadata, TeamKit, StylePreset, Difficulty } f
 export const App: React.FC = () => {
   const [state, setState] = useState<ProjectState>({
     currentStep: 1,
-    videoPath: "test_derbi_13s.mp4",
-    videoName: "derbi_gol_ani_2024.mp4",
-    metadata: {
-      duration: 13.0,
-      width: 1920,
-      height: 1080,
-      fps: 25.0,
-      frame_count: 325,
-      size_bytes: 30429,
-      codec: "h264",
-    },
-    inSec: 2.0,
-    outSec: 10.68,
-    currentPreviewSec: 6.84,
+    videoPath: null,
+    videoName: "",
+    videoUrl: null,
+    metadata: null,
+    inSec: 0,
+    outSec: 8.0,
+    currentPreviewSec: 0,
+    previewFrames: [],
+    hasCloseUpDetected: false,
+    isLoadingFrames: false,
     homeKit: {
       shirt: "#DE0B1E",
       shorts: "#FDB913",
@@ -50,6 +46,39 @@ export const App: React.FC = () => {
     isRendering: false,
     renderError: null,
   });
+
+  // Kare çıkarma ve yakın plan analizi
+  const fetchPreviewFrames = async (filePath: string, inVal: number, outVal: number) => {
+    if (!filePath) return;
+    setState((prev) => ({ ...prev, isLoadingFrames: true }));
+    try {
+      // @ts-ignore
+      if (window.__TAURI_INTERNALS__) {
+        const { invoke } = await import("@tauri-apps/api/core");
+        const resp: any = await invoke("run_sidecar_action", {
+          action: "frames",
+          payload: {
+            path: filePath,
+            in_sec: inVal,
+            out_sec: outVal,
+            fps: 2,
+          },
+        });
+        if (resp && resp.frames) {
+          setState((prev) => ({
+            ...prev,
+            previewFrames: resp.frames,
+            hasCloseUpDetected: Boolean(resp.has_close_up),
+            isLoadingFrames: false,
+          }));
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn("Sidecar kare çıkarma hatası:", err);
+    }
+    setState((prev) => ({ ...prev, isLoadingFrames: false }));
+  };
 
   // Tauri event listener (sidecar-progress)
   useEffect(() => {
@@ -87,13 +116,15 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Dosya seçildiğinde metadata probe et
+  // Dosya seçildiğinde metadata probe et ve kareleri çek
   const handleSelectFile = async (filePath: string, fileName: string, fileUrl?: string) => {
     setState((prev) => ({
       ...prev,
       videoPath: filePath,
       videoName: fileName,
       videoUrl: fileUrl || null,
+      previewFrames: [],
+      hasCloseUpDetected: false,
     }));
 
     try {
@@ -107,13 +138,17 @@ export const App: React.FC = () => {
 
         if (resp && resp.data) {
           const meta: VideoMetadata = resp.data;
+          const initialOut = Math.min(meta.duration, 8.68);
           setState((prev) => ({
             ...prev,
             metadata: meta,
             inSec: 0,
-            outSec: Math.min(meta.duration, 8.68),
+            outSec: initialOut,
             currentPreviewSec: Math.min(meta.duration / 2, 4.0),
           }));
+
+          // Arka planda filmstrip karelerini ve yakın plan tespitini çıkar
+          fetchPreviewFrames(filePath, 0, initialOut);
         }
       }
     } catch (err) {
@@ -228,6 +263,14 @@ export const App: React.FC = () => {
               inSec={state.inSec}
               outSec={state.outSec}
               currentPreviewSec={state.currentPreviewSec}
+              previewFrames={state.previewFrames}
+              hasCloseUpDetected={state.hasCloseUpDetected}
+              isLoadingFrames={state.isLoadingFrames}
+              onRefreshFrames={() => {
+                if (state.videoPath) {
+                  fetchPreviewFrames(state.videoPath, state.inSec, state.outSec);
+                }
+              }}
               onChangeInSec={(val) => setState((prev) => ({ ...prev, inSec: val }))}
               onChangeOutSec={(val) => setState((prev) => ({ ...prev, outSec: val }))}
               onChangePreviewSec={(val) => setState((prev) => ({ ...prev, currentPreviewSec: val }))}

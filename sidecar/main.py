@@ -18,6 +18,11 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
+try:
+    import cv2
+except ImportError:
+    cv2 = None
+
 from detect import Detector
 from draw import render_cartoon_frame, CANVAS_WIDTH, CANVAS_HEIGHT
 
@@ -99,24 +104,40 @@ def probe_video(video_path):
             }
         })
     except Exception as e:
-        # Fallback sentetik bilgi (eğer ffprobe yoksa)
-        send_json({
-            "type": "meta",
-            "data": {
-                "duration": 12.0,
-                "width": 1920,
-                "height": 1080,
-                "fps": 30.0,
-                "frame_count": 360,
-                "size_bytes": size_bytes,
-                "codec": "h264"
-            }
-        })
+        # Fallback OpenCV ile gerçek dosya okuma (ffprobe engeli veya izin sorununda)
+        if cv2 is not None:
+            try:
+                cap = cv2.VideoCapture(video_path)
+                if cap.isOpened():
+                    w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+                    h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+                    fps_val = round(float(cap.get(cv2.CAP_PROP_FPS)), 2) or 30.0
+                    f_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                    dur = round(f_count / fps_val, 2) if fps_val > 0 else 0.0
+                    cap.release()
+                    if w > 0 and h > 0 and dur > 0:
+                        send_json({
+                            "type": "meta",
+                            "data": {
+                                "duration": dur,
+                                "width": w,
+                                "height": h,
+                                "fps": fps_val,
+                                "frame_count": f_count,
+                                "size_bytes": size_bytes,
+                                "codec": "h264"
+                            }
+                        })
+                        return
+            except Exception:
+                pass
+        send_json({"type": "error", "message": f"Video meta bilgisi okunamadı: {str(e)}"})
 
 
 def extract_preview_frames(video_path, in_sec=0.0, out_sec=10.0, sample_fps=2):
     """
     Belirtilen aralıktan saniyede sample_fps kadar kareyi base64 jpeg olarak döner.
+    Ayrıca her karede oyuncu tespiti ve yakın plan heuristiğini (%35 kutu yüksekliği) çalıştırır.
     """
     video_path = resolve_video_path(video_path)
     if not os.path.exists(video_path):
@@ -135,7 +156,7 @@ def extract_preview_frames(video_path, in_sec=0.0, out_sec=10.0, sample_fps=2):
             "-ss", str(in_sec),
             "-t", str(duration),
             "-i", video_path,
-            "-vf", f"fps={sample_fps},scale=640:-1",
+            "-vf", f"fps={sample_fps},scale=480:-1",
             "-q:v", "4",
             out_pattern
         ]
@@ -143,19 +164,33 @@ def extract_preview_frames(video_path, in_sec=0.0, out_sec=10.0, sample_fps=2):
 
         frames = []
         files = sorted(os.listdir(tmp_dir))
+        detector = Detector()
+        any_close_up = False
+
         for idx, fname in enumerate(files):
             if fname.endswith(".jpg"):
                 fpath = os.path.join(tmp_dir, fname)
+                det_res = detector.detect_frame(fpath)
+                has_cup = det_res.get("has_close_up", False)
+                if has_cup:
+                    any_close_up = True
+
                 with open(fpath, "rb") as f:
                     b64_data = base64.b64encode(f.read()).decode("utf-8")
                 time_sec = round(in_sec + (idx / float(sample_fps)), 2)
                 frames.append({
                     "time_sec": time_sec,
                     "frame_index": idx,
-                    "data_uri": f"data:image/jpeg;base64,{b64_data}"
+                    "data_uri": f"data:image/jpeg;base64,{b64_data}",
+                    "has_close_up": has_cup,
+                    "players": det_res.get("players", [])
                 })
 
-        send_json({"type": "frames", "frames": frames})
+        send_json({
+            "type": "frames",
+            "frames": frames,
+            "has_close_up": any_close_up
+        })
     except Exception as e:
         send_json({"type": "error", "message": f"Kare çıkarma hatası: {e}"})
     finally:
